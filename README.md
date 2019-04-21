@@ -1,6 +1,13 @@
 # Assignment 2 - *Project Name*
 
 ## Instructions
+### Setup Environment
+| Task        | Guide |
+| ----------- | ----------- |
+|  Install Java 8     | We require [java-8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)  |
+| Install Maven   | Windows: [tutorial](https://www.google.com/search?q=install+maven+on+windows&oq=install+maven+on+windows&aqs=chrome..69i57j0l5.3082j0j4&sourceid=chrome&ie=UTF-8), Mac: `brew install maven`, Ubuntu: `sudo apt-get install maven`        |
+| Setup Intellij | [Tutorial](https://www.jetbrains.com/help/idea/installation-guide.html?section=Windows) |
+
 This is a maven project. Follow the below steps to import it [https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start]. Watch this short video on using maven in intellij [https://youtu.be/pt3uB0sd5kY] 
 
 Once imported, open the command line and enter following git commands 
