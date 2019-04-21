@@ -17,14 +17,54 @@ git remote rename origin upstream
 git remote add origin https://github.uci.edu/EECS40-19/eecs40-S19-assignment2-team-[XX].git
 git push -u origin master
 ```
-Replace [XX] above with your team number. 
+Replace [XX] above with your team number. Follow the exact convention as above to create your team's repo. Do not add team name in the repo. 
 
-### Import in Intellij
-This is a maven project. Follow the below steps to import it [https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start]. Watch this short video on using maven in intellij [https://youtu.be/pt3uB0sd5kY] 
+### Import project in Intellij
+To setup project in intellij:
+  * Run `mvn clean install -DskipTests` in command line
+  * open IntelliJ -> Open -> Choose the directory. Wait for IntelliJ to finish importing and building.
+  * You can run the Main program under src/main/java/edu.uci.eecs40 package to test if everything works.
 
+This is a project managed by Maven build tool. If you are new to maven you can read up over here [https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start] or watch this short video on using maven in intellij [https://youtu.be/pt3uB0sd5kY] 
+
+### Project structure
+```
+clyton@clyton-ThinkPad-T430:~/git/assignment2$ tree
+.
+├── assignment2.iml
+├── pom.xml
+├── README.md
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── edu
+│   │   │       └── uci
+│   │   │           └── eecs40
+│   │   │               └── Main.java
+│   │   └── resources
+│   └── test
+│       ├── java
+│       │   └── edu
+│       │       └── uci
+│       │           └── eecs40
+│       │               └── MainTest.java
+│       └── resources
+│           └── dummySimulatorTest
+│               ├── expected_output.redcode
+│               ├── program_x.redcode
+│               └── program_y.redcode
+└── target
+    ├── assignment2-1.0-SNAPSHOT.jar
+    ├── assignment2-1.0-SNAPSHOT-shaded.jar
+```
+* All your source files will be under the `src/main/java` directory. You should create source packages under this directory. 
+* `Main.java` is the entry point of your program. So make sure you call your helper functions from inside Main.main() method. 
+* `src/test/java` contain the test code. It's a good practice to write unit tests for small functionalities that you implement. The code you write in this folder will not be graded by us; its only for your convenience and learning. For this purpose, I have included a sample test code which tests a dummySimulator. You can browse through this code and use it as a template to create your own tests. Junit library is used to create tests
+* `src/main/resources` and `src/test/resources` contains the files that your code will use. For the dummySimulatorTest, I have added two input files and an expected output file. Use this directory structure to organize additional tests that you may write
+* In order to run all your tests you can use the maven command `mvn test` on command line or run it via intellij maven window.
 
 ### Submission
-In order to submit the assignment, you will have to run execute `mvn install` from command line or alternatively do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `assignment2/target/assignment2-1.0-SNAPSHOT-shaded.jar` file. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the target folder to your github repository. 
+We will grade your assignment by running your jar file. The jar file contains all dependencies you've used as well as the code you've written. To create a jar file using maven to execute `mvn install` from command line OR do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `target/assignment2-1.0-SNAPSHOT-shaded.jar` file in the target folder. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the target folder to your github repository.  
 
 **Project Name** Project description.
 
