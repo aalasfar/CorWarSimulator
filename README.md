@@ -22,7 +22,7 @@ git push -u origin master
 Replace [XX] above with your team number. 
 
 ### Submission
-In order to submit the assignment, you will have to run execute `mvn install` from command line or alternatively do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `assignment2/target/assignment2-1.0-SNAPSHOT-shaded.jar` file. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'.  
+In order to submit the assignment, you will have to run execute `mvn install` from command line or alternatively do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `assignment2/target/assignment2-1.0-SNAPSHOT-shaded.jar` file. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the target folder to your github repository. 
 
 **Project Name** Project description.
 
