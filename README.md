@@ -3,11 +3,14 @@
 ## Instructions
 This is a maven project. Follow the below steps to import it [https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start]. Once imported, open the command line and enter following git commands 
 
+```
 git clone https://github.uci.edu/EECS40-19/assignment2
 cd assignment2/
 git remote rename origin upstream
-git remote add origin https://github.uci.edu/EECS40-19/assignment2/eecs40-S19-assignment2-team-[XX].git
+git remote add origin https://github.uci.edu/EECS40-19/eecs40-S19-assignment2-team-[XX].git
 git push -u origin master
+```
+Replace [XX] above with your team number. 
 
 **Project Name** Project description.
 
