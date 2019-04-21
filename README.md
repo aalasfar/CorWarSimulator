@@ -8,9 +8,7 @@
 | Install Maven   | Windows: [tutorial](https://www.google.com/search?q=install+maven+on+windows&oq=install+maven+on+windows&aqs=chrome..69i57j0l5.3082j0j4&sourceid=chrome&ie=UTF-8), Mac: `brew install maven`, Ubuntu: `sudo apt-get install maven`        |
 | Setup Intellij | [Tutorial](https://www.jetbrains.com/help/idea/installation-guide.html?section=Windows) |
 
-This is a maven project. Follow the below steps to import it [https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start]. Watch this short video on using maven in intellij [https://youtu.be/pt3uB0sd5kY] 
-
-Once imported, open the command line and enter following git commands 
+To setup the project, open the command line and enter following git commands 
 
 ```
 git clone https://github.uci.edu/EECS40-19/assignment2
@@ -20,6 +18,10 @@ git remote add origin https://github.uci.edu/EECS40-19/eecs40-S19-assignment2-te
 git push -u origin master
 ```
 Replace [XX] above with your team number. 
+
+### Import in Intellij
+This is a maven project. Follow the below steps to import it [https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start]. Watch this short video on using maven in intellij [https://youtu.be/pt3uB0sd5kY] 
+
 
 ### Submission
 In order to submit the assignment, you will have to run execute `mvn install` from command line or alternatively do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `assignment2/target/assignment2-1.0-SNAPSHOT-shaded.jar` file. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the target folder to your github repository. 
