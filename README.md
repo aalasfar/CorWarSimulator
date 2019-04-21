@@ -62,9 +62,10 @@ clyton@clyton-ThinkPad-T430:~/git/assignment2$ tree
 * `src/test/java` contain the test code. It's a good practice to write unit tests for small functionalities that you implement. The code you write in this folder will not be graded by us; its only for your convenience and learning. For this purpose, I have included a sample test code which tests a dummySimulator. You can browse through this code and use it as a template to create your own tests. Junit library is used to create tests
 * `src/main/resources` and `src/test/resources` contains the files that your code will use. For the dummySimulatorTest, I have added two input files and an expected output file. Use this directory structure to organize additional tests that you may write
 * In order to run all your tests you can use the maven command `mvn test` on command line or run it via intellij maven window.
+* the `target/` folder contains all the jar files, class files and documentation. Jar files will be needed to make a submission.
 
 ### Submission
-We will grade your assignment by running your jar file. The jar file contains all dependencies you've used as well as the code you've written. To create a jar file using maven to execute `mvn install` from command line OR do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `target/assignment2-1.0-SNAPSHOT-shaded.jar` file in the target folder. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the target folder to your github repository.  
+We will grade your assignment by running your jar file. The jar file contains all dependencies you've used as well as the code you've written. To create a jar file using maven to execute `mvn install` from command line OR do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `target/assignment2-1.0-SNAPSHOT-shaded.jar` file in the target folder. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the jar file to your github repository. Avoid commiting the entire target folder because it is a derived folder and it will add unwanted noise to your git logs.  
 
 **Project Name** Project description.
 
