@@ -22,6 +22,8 @@ Replace [XX] above with your team number. Follow the exact convention as above t
 
 ### Import project in Intellij
 To setup project in intellij:
+
+In command prompt, cd into assignment2 folder that is just created as D:\EECS40\assignment2>
   * Run `mvn clean install -DskipTests` in command line
   * open IntelliJ -> Open -> Choose the directory. Wait for IntelliJ to finish importing and building.
   * You can run the Main program under src/main/java/edu.uci.eecs40 package to test if everything works.
