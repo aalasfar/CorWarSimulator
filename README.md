@@ -8,6 +8,8 @@
 | Install Maven   | Windows: [tutorial](https://www.google.com/search?q=install+maven+on+windows&oq=install+maven+on+windows&aqs=chrome..69i57j0l5.3082j0j4&sourceid=chrome&ie=UTF-8), Mac: `brew install maven`, Ubuntu: `sudo apt-get install maven`        |
 | Setup Intellij | [Tutorial](https://www.jetbrains.com/help/idea/installation-guide.html?section=Windows) |
 
+Make sure that your JAVA_HOME is setup by verifying echo %JAVA_HOME%. It should give the path of JDK like C: \Program Files\Java\jdk1.8.0_211. This should be Java 8. Any other version would fail.
+
 Create a git repository in EECS40-19 with name eecs40-S19-assignment2-team-[XX].git where XX is your team number
 To setup the project, open the command line and enter following git commands 
 
@@ -29,7 +31,7 @@ In command prompt, cd into assignment2 folder that is just created as D:\EECS40\
   * Now save and close this pom.xml
   * Run `mvn clean install -DskipTests` in command line
   * open IntelliJ -> Open -> Choose the directory. Wait for IntelliJ to finish importing and building.
-  * You can run the Main program under src/main/java/edu.uci.eecs40 package to test if everything works.
+  * You can run the Main program under src/main/java/edu.uci.eecs40 package to test if everything works. For this press Ctrl+E->Select Maven and then run install. You can also try test.
 
 This is a project managed by Maven build tool. If you are new to maven you can read up over here [https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start] or watch this short video on using maven in intellij [https://youtu.be/pt3uB0sd5kY] 
 
