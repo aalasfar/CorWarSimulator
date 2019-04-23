@@ -24,6 +24,9 @@ Replace [XX] above with your team number. Follow the exact convention as above t
 To setup project in intellij:
 
 In command prompt, cd into assignment2 folder that is just created as D:\EECS40\assignment2>
+  * Open pom.xml file and change artifactId to this line. Replace 'XX' with your team number
+    `<artifactId>eecs40-S19-assignment2-team-[XX]</artifactId>` . This is the name your jar file will be given
+  * Now save and close this pom.xml
   * Run `mvn clean install -DskipTests` in command line
   * open IntelliJ -> Open -> Choose the directory. Wait for IntelliJ to finish importing and building.
   * You can run the Main program under src/main/java/edu.uci.eecs40 package to test if everything works.
