@@ -30,7 +30,7 @@ In command prompt, cd into assignment2 folder that is just created as D:\EECS40\
   * Now save and close this pom.xml
   * Run `mvn clean install -DskipTests` in command line
   * open IntelliJ -> Open -> Choose the directory. Wait for IntelliJ to finish importing and building.
-  * You can run the Main program under src/main/java/edu.uci.eecs40 package to test if everything works. For this press Ctrl+E->Select Maven and then run install. You can also try test.
+  * You can run the Main program under src/main/java/edu.uci.eecs40 package to test if everything works. For this press Ctrl+E->Select Maven->LifeCycle and then run install. You can also try test.
 
 This is a project managed by Maven build tool. If you are new to maven you can read up over here [https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start] or watch this short video on using maven in intellij [https://youtu.be/pt3uB0sd5kY] 
 
