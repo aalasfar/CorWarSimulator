@@ -8,6 +8,7 @@
 | Install Maven   | Windows: [tutorial](https://www.google.com/search?q=install+maven+on+windows&oq=install+maven+on+windows&aqs=chrome..69i57j0l5.3082j0j4&sourceid=chrome&ie=UTF-8), Mac: `brew install maven`, Ubuntu: `sudo apt-get install maven`        |
 | Setup Intellij | [Tutorial](https://www.jetbrains.com/help/idea/installation-guide.html?section=Windows) |
 
+Create a git repository in EECS40-19 with name eecs40-S19-assignment2-team-[XX].git where XX is your team number
 To setup the project, open the command line and enter following git commands 
 
 ```
