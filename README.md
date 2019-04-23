@@ -72,7 +72,7 @@ clyton@clyton-ThinkPad-T430:~/git/assignment2$ tree
 * the `target/` folder contains all the jar files, class files and documentation. Jar files will be needed to make a submission.
 
 ### Submission
-We will grade your assignment by running your jar file. The jar file contains all dependencies you've used as well as the code you've written. To create a jar file using maven to execute `mvn install` from command line OR do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `target/assignment2-1.0-SNAPSHOT-shaded.jar` file in the target folder. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the jar file to your github repository. Avoid commiting the entire target folder because it is a derived folder and it will add unwanted noise to your git logs.  
+We will grade your assignment by running your jar file. The jar file contains all dependencies you've used as well as the code you've written. To create a jar file using maven to execute `mvn install` from command line OR do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `eecs40-S19-assignment2-team-XX-1.0-SNAPSHOT-shaded.jar` file in the target folder. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the jar file to your github repository. Avoid commiting the entire target folder because it is a derived folder and it will add unwanted noise to your git logs.  
 
 **Project Name** Project description.
 
