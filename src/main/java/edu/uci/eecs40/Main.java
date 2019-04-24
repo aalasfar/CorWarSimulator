@@ -41,5 +41,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        // The last line of your program output should say which program wins
+        System.out.println("PROGRAM_Y WINS");
     }
 }
