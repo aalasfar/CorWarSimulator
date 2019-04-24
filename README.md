@@ -15,7 +15,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 ```
 
-Each team has been assigned a unique team number in the google sheets here [https://drive.google.com/open?id=1k4qi3q-Gz5CZrFTtR_28K1AdZypRc2O4OwrGVuevBjA]. Use that team number to create a git repository in EECS40-19 with name eecs40-S19-assignment2-team-[XX].git where XX is your team number
+Each team has been assigned a unique team number. Use that team number to create a git repository in EECS40-19 with name eecs40-S19-assignment2-team-[XX].git where XX is your team number
 To setup the project, open the command line and enter following git commands 
 
 ```
