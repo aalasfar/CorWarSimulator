@@ -15,7 +15,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 ```
 
-Each team has been assigned a unique team number in the google sheets here [https://docs.google.com/spreadsheets/d/1k4qi3q-Gz5CZrFTtR_28K1AdZypRc2O4OwrGVuevBjA/edit#gid=1789860372]. Use that team number to create a git repository in EECS40-19 with name eecs40-S19-assignment2-team-[XX].git where XX is your team number
+Each team has been assigned a unique team number. Use that team number to create a git repository in EECS40-19 with name eecs40-S19-assignment2-team-[XX].git where XX is your team number
 To setup the project, open the command line and enter following git commands 
 
 ```
@@ -70,14 +70,17 @@ clyton@clyton-ThinkPad-T430:~/git/assignment2$ tree
     ├── assignment2-1.0-SNAPSHOT-shaded.jar
 ```
 * All your source files will be under the `src/main/java` directory. You should create source packages under this directory. 
-* `Main.java` is the entry point of your program. So make sure you call your helper functions from inside Main.main() method. 
+* `Main.java` is the entry point of your program. So make sure you call your helper functions from inside Main.main() method. Copy your main class file inside Main.java and all other source files in this directory.  
 * `src/test/java` contain the test code. It's a good practice to write unit tests for small functionalities that you implement. The code you write in this folder will not be graded by us; its only for your convenience and learning. For this purpose, I have included a sample test code which tests a dummySimulator. You can browse through this code and use it as a template to create your own tests. Junit library is used to create tests
 * `src/main/resources` and `src/test/resources` contains the files that your code will use. For the dummySimulatorTest, I have added two input files and an expected output file. Use this directory structure to organize additional tests that you may write
 * In order to run all your tests you can use the maven command `mvn test` on command line or run it via intellij maven window.
 * the `target/` folder contains all the jar files, class files and documentation. Jar files will be needed to make a submission.
 
 ### Submission
-We will grade your assignment by running your jar file. The jar file contains all dependencies you've used as well as the code you've written. To create a jar file using maven to execute `mvn install` from command line OR do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `eecs40-S19-assignment2-team-XX-1.0-SNAPSHOT-shaded.jar` file in the target folder. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the jar file to your github repository. Avoid commiting the entire target folder because it is a derived folder and it will add unwanted noise to your git logs. Now upload the `*shaded.jar` file to canvas
+We will grade your assignment by running your jar file. The jar file contains all dependencies you've used as well as the code you've written. To create a jar file using maven to execute `mvn install` from command line OR do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `eecs40-S19-assignment2-team-XX-1.0-SNAPSHOT-shaded.jar` file in the target folder. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the jar file to your github repository. Avoid commiting the entire target folder because it is a derived folder and it will add unwanted noise to your git logs. Now upload the `*shaded.jar` file to canvas. To make sure that your jar has been created properly execute your jar file using the below command `java -jar assignment2-1.0-SNAPSHOT-shaded.jar ../src/test/resources/dummySimulatorTest/program_x.txt ../src/test/resources/dummySimulatorTest/program_y.txt 
+`
+
+
 
 **Project Name** Project description.
 
