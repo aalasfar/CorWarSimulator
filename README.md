@@ -70,7 +70,7 @@ clyton@clyton-ThinkPad-T430:~/git/assignment2$ tree
     ├── assignment2-1.0-SNAPSHOT-shaded.jar
 ```
 * All your source files will be under the `src/main/java` directory. You should create source packages under this directory. 
-* `Main.java` is the entry point of your program. So make sure you call your helper functions from inside Main.main() method. 
+* `Main.java` is the entry point of your program. So make sure you call your helper functions from inside Main.main() method. Copy your main class file inside Main.java and all other source files in this directory.  
 * `src/test/java` contain the test code. It's a good practice to write unit tests for small functionalities that you implement. The code you write in this folder will not be graded by us; its only for your convenience and learning. For this purpose, I have included a sample test code which tests a dummySimulator. You can browse through this code and use it as a template to create your own tests. Junit library is used to create tests
 * `src/main/resources` and `src/test/resources` contains the files that your code will use. For the dummySimulatorTest, I have added two input files and an expected output file. Use this directory structure to organize additional tests that you may write
 * In order to run all your tests you can use the maven command `mvn test` on command line or run it via intellij maven window.
