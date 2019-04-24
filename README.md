@@ -8,9 +8,14 @@
 | Install Maven   | Windows: [tutorial](https://www.google.com/search?q=install+maven+on+windows&oq=install+maven+on+windows&aqs=chrome..69i57j0l5.3082j0j4&sourceid=chrome&ie=UTF-8), Mac: `brew install maven`, Ubuntu: `sudo apt-get install maven`        |
 | Setup Intellij | [Tutorial](https://www.jetbrains.com/help/idea/installation-guide.html?section=Windows) |
 
-Make sure that your JAVA_HOME is setup by verifying echo %JAVA_HOME%. It should give the path of JDK like C: \Program Files\Java\jdk1.8.0_211. This should be Java 8. Any other version would fail.
+Make sure that your JAVA_HOME environment variable is setup by verifying echo %JAVA_HOME%. It should give the path of JDK like C: \Program Files\Java\jdk1.8.0_211. This should be Java 8. Any other version would fail. In mac/linux you can set this variable by saving adding following lines to your `~/.bash_profile` file
+```
+export JAVA_HOME=jdk8-install-dir
+export PATH=$JAVA_HOME/bin:$PATH
 
-Create a git repository in EECS40-19 with name eecs40-S19-assignment2-team-[XX].git where XX is your team number
+```
+
+Each team has been assigned a unique team number in the google sheets here [https://docs.google.com/spreadsheets/d/1k4qi3q-Gz5CZrFTtR_28K1AdZypRc2O4OwrGVuevBjA/edit#gid=1789860372]. Use that team number to create a git repository in EECS40-19 with name eecs40-S19-assignment2-team-[XX].git where XX is your team number
 To setup the project, open the command line and enter following git commands 
 
 ```
@@ -72,7 +77,7 @@ clyton@clyton-ThinkPad-T430:~/git/assignment2$ tree
 * the `target/` folder contains all the jar files, class files and documentation. Jar files will be needed to make a submission.
 
 ### Submission
-We will grade your assignment by running your jar file. The jar file contains all dependencies you've used as well as the code you've written. To create a jar file using maven to execute `mvn install` from command line OR do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `eecs40-S19-assignment2-team-XX-1.0-SNAPSHOT-shaded.jar` file in the target folder. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the jar file to your github repository. Avoid commiting the entire target folder because it is a derived folder and it will add unwanted noise to your git logs.  
+We will grade your assignment by running your jar file. The jar file contains all dependencies you've used as well as the code you've written. To create a jar file using maven to execute `mvn install` from command line OR do it from the ide by pressing 'Ctrl+E' > Choosing Maven window > Under Lifecycle, click 'install'. This will generate `eecs40-S19-assignment2-team-XX-1.0-SNAPSHOT-shaded.jar` file in the target folder. Make sure you are able to run this jar in intellij by right clicking it and selecting 'Run'. Now commit and push the jar file to your github repository. Avoid commiting the entire target folder because it is a derived folder and it will add unwanted noise to your git logs. Now upload the `*shaded.jar` file to canvas
 
 **Project Name** Project description.
 
