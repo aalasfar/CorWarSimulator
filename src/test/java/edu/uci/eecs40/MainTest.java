@@ -35,15 +35,16 @@ public class MainTest {
 
     @Test
     public void testDummySimulator(){
-        Main.main(new String[]{"resources/test1/program_x.redcode", "resources/test1/program_y.redcode"});
+        Main.main(new String[]{"src/test/resources/dummySimulatorTest/program_x.txt", "src/test/resources/dummySimulatorTest/program_y.txt"});
         String result;
         try{
             // For large files do not load all lines in memory
-            List<String> allLines = Files.readAllLines(Paths.get("resources/dummySimulatorTest/expected_output.redcode"));
+            List<String> allLines = Files.readAllLines(Paths.get("src/test/resources/dummySimulatorTest/expected_output.txt"));
             result = String.join("\n", allLines);
             Assert.assertEquals(result, outContent.toString());
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail("File exception");
         }
 
 

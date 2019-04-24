@@ -33,7 +33,8 @@ public class Main {
                     System.out.println(line);
                     // read next line
                     line = reader.readLine();
-                    System.out.println(line);
+//                    if (line != null) System.out.println();
+//                    System.out.println(line);
                 }
                 reader.close();
             } catch (IOException e) {
