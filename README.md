@@ -11,6 +11,7 @@
 Make sure that your JAVA_HOME environment variable is setup by verifying echo %JAVA_HOME%. It should give the path of JDK like C: \Program Files\Java\jdk1.8.0_211. This should be Java 8. Any other version would fail. In mac/linux you can set this variable by saving adding following lines to your ~/.bash_profile file
 `
 export JAVA_HOME=jdk8-install-dir
+
 export PATH=$JAVA_HOME/bin:$PATH
 `
 
