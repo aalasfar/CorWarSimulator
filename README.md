@@ -9,11 +9,11 @@
 | Setup Intellij | [Tutorial](https://www.jetbrains.com/help/idea/installation-guide.html?section=Windows) |
 
 Make sure that your JAVA_HOME environment variable is setup by verifying echo %JAVA_HOME%. It should give the path of JDK like C: \Program Files\Java\jdk1.8.0_211. This should be Java 8. Any other version would fail. In mac/linux you can set this variable by saving adding following lines to your ~/.bash_profile file
-`
+```
 export JAVA_HOME=jdk8-install-dir
 export PATH=$JAVA_HOME/bin:$PATH
 
-`
+```
 
 Each team has been assigned a unique team number in the google sheets here [https://docs.google.com/spreadsheets/d/1k4qi3q-Gz5CZrFTtR_28K1AdZypRc2O4OwrGVuevBjA/edit#gid=1789860372]. Use that team number to create a git repository in EECS40-19 with name eecs40-S19-assignment2-team-[XX].git where XX is your team number
 To setup the project, open the command line and enter following git commands 
