@@ -83,11 +83,11 @@ We will grade your assignment by running your jar file. The jar file contains al
 
 **Project Name** Project description.
 
-Team Name:
-* **Student Name 1**
-- UCInetID
-* **Student Name 2**
-- UCInetID
+Team Name: Endgame
+* **Nathaniel Aponte**
+- UCInetID: aponten
+* **Adbullah Alasfar**
+- UCInetID: 
 
 ## Functionalities
 [//]: # (Write [x] to mark off what was accomplished.<br/>)
