@@ -23,8 +23,8 @@ public class OpenFile {
             }
             fileReader.close();
 
-            //System.out.println("Contents of file:");
-            //System.out.println(stringBuffer.toString());
+            System.out.println("Contents of file:");
+            System.out.println(stringBuffer.toString());
         } catch (IOException except) {
             except.printStackTrace();
         }
