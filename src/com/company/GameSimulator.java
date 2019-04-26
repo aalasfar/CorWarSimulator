@@ -1,5 +1,6 @@
 package com.company;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class GameSimulator {
 
@@ -15,6 +16,7 @@ public class GameSimulator {
     //printFileContents(fileInput);
 
     String[] myArray = new String[MAX];
+    String[] instuction = new String[MAX];
     String[] modeA = new String[MAX];
     String[] modeB = new String[MAX];
     int[] Afield = new int[MAX];
@@ -26,7 +28,7 @@ public class GameSimulator {
 
         //initialize to DAT 0
         for (int i = 0; i < myArray.length; i++) {
-            myArray[i] = "DAT";
+            instuction[i] = "DAT";
             modeA[i]= " ";
             Afield[i]= 0;
             modeB[i]= " ";
@@ -49,15 +51,29 @@ public class GameSimulator {
                 NotDoneInput = false;
             }
         }
+        for ( int i = 0; i < count ; i++) {
+            String s = myArray[initialPos +i];
+            instuction[initialPos+i] = myArray[initialPos+i].substring(0,3);
+            String str = s.replaceAll("[^0-9]+", " ");
+            String strnum[] = str.split(" ");
+            char[] arr = s.toCharArray();
+            int[] numbers = new int[strnum.length];
+            for (int u = 0; u < strnum.length - 1; u++) {
+                numbers[u] = Integer.parseInt(strnum[u + 1]);
+            }
+            Afield[initialPos+i] = numbers[0];
+            Bfield[initialPos+i] = numbers[1];
+        }
+
 
         //outputting current location with 5 before and after
         for (int i = -5; i < 6; i++) {
             int k = (i + initialPos + MAX) % MAX;
             //System.out.println("k = "+k);
             if (k == initialPos) {
-                System.out.println(k + ":" + myArray[k]+ " " + modeA[k]+Afield[k]+ "," + modeB[k]+Bfield[k]);
+                System.out.println(k + ":" + instuction[k]+ " " + modeA[k]+Afield[k]+ "," + modeB[k]+Bfield[k]);
             }
-            else {  System.out.println(k + ":" + myArray[k]+ " " + modeA[k]+Afield[k]+ "," + modeB[k]+Bfield[k]);    }
+            else {  System.out.println(k + ":" + instuction[k]+ " " + modeA[k]+Afield[k]+ "," + modeB[k]+Bfield[k]);    }
         }
     }
 }
