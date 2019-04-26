@@ -29,9 +29,9 @@ public class GameSimulator {
         //initialize to DAT 0
         for (int i = 0; i < myArray.length; i++) {
             instuction[i] = "DAT";
-            modeA[i]= " ";
+            modeA[i] = " ";
             Afield[i]= 0;
-            modeB[i]= " ";
+            modeB[i] = " ";
             Bfield[i] = 0;
         }
 
@@ -52,17 +52,43 @@ public class GameSimulator {
             }
         }
         for ( int i = 0; i < count ; i++) {
-            String s = myArray[initialPos +i];
-            instuction[initialPos+i] = myArray[initialPos+i].substring(0,3);
-            String str = s.replaceAll("[^0-9]+", " ");
-            String strnum[] = str.split(" ");
-            char[] arr = s.toCharArray();
-            int[] numbers = new int[strnum.length];
-            for (int u = 0; u < strnum.length - 1; u++) {
-                numbers[u] = Integer.parseInt(strnum[u + 1]);
+            int x = initialPos +i;
+            String s = myArray[x];
+            instuction[x] = myArray[x].substring(0,3);
+            // need to check for DAT, JMP, and SPL input since they only enter 1 number
+            if (instuction[x].equals("DAT")){
+                System.out.println("using Dat");
+                String str = s.replaceAll("[^-?0-9]+", " ");
+                String strnum[] = str.split(" ");
+                char[] arr = s.toCharArray();
+                int[] numbers = new int[strnum.length];
+                for (int u = 0; u < strnum.length - 1; u++) {
+                    numbers[u] = Integer.parseInt(strnum[u + 1]);
+                }
+                Bfield[x] = numbers[0];
             }
-            Afield[initialPos+i] = numbers[0];
-            Bfield[initialPos+i] = numbers[1];
+            else {
+                String str = s.replaceAll("[^-?0-9]+", " ");
+                String strnum[] = str.split(" ");
+                String[]  str2 =  new String[3];
+                str2 = s.split(" ");
+                int[] numbers = new int[strnum.length];
+                for (int u = 0; u < strnum.length - 1; u++) {
+                    numbers[u] = Integer.parseInt(strnum[u + 1]);
+                }
+                if (str2[1].substring(0,1).equals("#")|| str2[1].substring(0,1).equals("*")
+                        || str2[1].substring(0,1).equals("@")){
+                    modeA[x] = str2[1].substring(0,1);
+                }
+                if (str2.length == 3) {
+                    if (str2[2].substring(0, 1).equals("#") || str2[2].substring(0, 1).equals("*")
+                            || str2[2].substring(0, 1).equals("@")) {
+                        modeB[x] = str2[2].substring(0, 1);
+                    }
+                }
+                Afield[x] = numbers[0];
+                Bfield[x] = numbers[1];
+            }
         }
 
 
