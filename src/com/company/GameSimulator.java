@@ -15,6 +15,10 @@ public class GameSimulator {
     //printFileContents(fileInput);
 
     String[] myArray = new String[MAX];
+    String[] modeA = new String[MAX];
+    String[] modeB = new String[MAX];
+    int[] Afield = new int[MAX];
+    int[] Bfield = new int[MAX];
 
     public void mySim(OpenFile f) {
 
@@ -22,7 +26,11 @@ public class GameSimulator {
 
         //initialize to DAT 0
         for (int i = 0; i < myArray.length; i++) {
-            myArray[i] = "DAT 0";
+            myArray[i] = "DAT";
+            modeA[i]= " ";
+            Afield[i]= 0;
+            modeB[i]= " ";
+            Bfield[i] = 0;
         }
 
         //generating random number between MAX and MIN
@@ -47,9 +55,9 @@ public class GameSimulator {
             int k = (i + initialPos + MAX) % MAX;
             //System.out.println("k = "+k);
             if (k == initialPos) {
-                System.out.println(k + "::::" + myArray[k]);
+                System.out.println(k + ":" + myArray[k]+ " " + modeA[k]+Afield[k]+ "," + modeB[k]+Bfield[k]);
             }
-            else {  System.out.println(k + "    " + myArray[k]);    }
+            else {  System.out.println(k + ":" + myArray[k]+ " " + modeA[k]+Afield[k]+ "," + modeB[k]+Bfield[k]);    }
         }
     }
 }
