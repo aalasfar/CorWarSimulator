@@ -2,4 +2,4 @@ MOV 0 , 1
 ADD #4, 2
 DAT 5
 JMP -1
-ADD 4, *2
+ADD *4, @2

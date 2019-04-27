@@ -6,19 +6,20 @@ public class GameSimulator {
 
 
     ArrayList<String> Player1 = new ArrayList<String>();
+    ArrayList<String> Player2 = new ArrayList<String>();
     OpenFile f = new OpenFile();
 
-    final int MAX = 100;
+    final int MAX = 8000;
     final int MIN = 0;
     boolean noWinner = true;
-    boolean NotDoneInput = true;
+    int initialPos2 = 0;
     //File fileInput = openFile();
     //printFileContents(fileInput);
     //5 new arrays including to have each input checked
     String[] myArray = new String[MAX];
     /*this can use a different MAX value since it only ever uses
     the amount of lines that are in the txt file  */
-    String[] instuction = new String[MAX];
+    String[] instruction = new String[MAX];
     //this instruction array is takes over myArray with just the instruction as string
     String[] modeA = new String[MAX];
     String[] modeB = new String[MAX];
@@ -27,45 +28,71 @@ public class GameSimulator {
     int[] Bfield = new int[MAX];
     //these keep the values as ints
 
+
     public void mySim(OpenFile f) {
 
-        Player1 = f.Openfile();
+        Player1 = f.Openfile("Warrior1.txt");
+        Player2 = f.Openfile("Warrior2.txt");
 
         //initialize to DAT 0
-        for (int i = 0; i < instuction.length; i++) {
-            instuction[i] = "DAT";
+        for (int i = 0; i < instruction.length; i++) {
+            instruction[i] = "DAT";
             modeA[i] = " ";
-            Afield[i]= 0;
+            Afield[i] = 0;
             modeB[i] = " ";
             Bfield[i] = 0;
         }
 
-        //generating random number between MAX and MIN
+        //generating random number between MAX and MIN for warrior1
         int initialPos = (int) ((Math.random() * (MAX + 1 - MIN)) + MIN); // generate random number
-        int j = initialPos; // used for assigning Player1 into the myArray (memory array)
+        //int j = initialPos; // used for assigning Player1 into the myArray (memory array)
+        System.out.println("\nWarrior 1 ");
         System.out.println("initialPos = " + initialPos);
-        int count = 0;  //count how many times iterated in Player1 for tracking size
+        int sizeOfWarrior1 = PlacingWarrior(Player1, myArray, initialPos);
+        ExecuteSim(sizeOfWarrior1, initialPos, myArray, instruction, modeA, modeB, Afield, Bfield);
+        PrintWarriors(instruction, initialPos, modeA, modeB, Afield, Bfield);
+
+        checkPosition(initialPos);
+        System.out.println("\nWarrior 2 ");
+        System.out.println("initialPos2 = "+ initialPos2);
+        int sizeOfWarrior2 = PlacingWarrior(Player2, myArray, initialPos2);
+        ExecuteSim(sizeOfWarrior2, initialPos2, myArray, instruction, modeA, modeB, Afield, Bfield);
+        PrintWarriors(instruction, initialPos2, modeA, modeB, Afield, Bfield);
+        //int count = 0;  //count how many times iterated in Player1 for tracking size
+
+    }
+
+    //method for placing warrior
+    public int PlacingWarrior(ArrayList<String> player, String[] memory, int position) {
+        ArrayList<String> p = new ArrayList<String>();
+        p = player;
+        int k = 0;
+        boolean NotDoneInput = true;
         while (NotDoneInput) {
-            myArray[j] = Player1.get(count);
-            j++;
-            count++;
-            if (j >= MAX) {
-                j = 0;
+            memory[position] = p.get(k);
+            position++;
+            k++;
+            if (position >= MAX) {
+                position = 0;
             }
-            if (count >= Player1.size()) {
+            if (k >= p.size()) {
                 NotDoneInput = false;
             }
         }
-        //inputs the program into the main array so i can then be excicuted
-        for ( int i = 0; i < count ; i++) {
+        return k;
+    }
+    //method for executing the instructions in memory
+    //inputs the program into the main array so i can then be executed
+    public void ExecuteSim(int count, int position, String[] array, String[] instruction, String[] mA, String[] mB, int[] fA, int[] fB) {
+        for (int i = 0; i < count; i++) {
             /*uses count from previous loop of getting each line to know how many lines to
             change  */
-            int x = (initialPos +i+MAX)% MAX; //makes sure each array is using same position
+            int x = (position + i + MAX) % MAX; //makes sure each array is using same position
             String s = myArray[x];
-            instuction[x] = myArray[x].substring(0,3); // gets instruction
+            instruction[x] = myArray[x].substring(0, 3); // gets instruction
             // need to check for DAT input since the number is in the B field
             //code is same as else statement but doesn't check mode and only changes B value
-            if (instuction[x].equals("DAT")){
+            if (instruction[x].equals("DAT")) {
                 String str = s.replaceAll("[^-?0-9]+", " ");
                 String strnum[] = str.split(" ");
                 char[] arr = s.toCharArray();
@@ -74,12 +101,11 @@ public class GameSimulator {
                     numbers[u] = Integer.parseInt(strnum[u + 1]);
                 }
                 Bfield[x] = numbers[0];
-            }
-            else {
+            } else {
                 String str = s.replaceAll("[^-?0-9]+", " ");
                 //gets numbers from the string
                 String strnum[] = str.split(" ");
-                String[]  str2 =  new String[3];
+                String[] str2 = new String[3];
                 str2 = s.split(" ");
                 //splits string into 3 to get the mode
                 int[] numbers = new int[strnum.length];
@@ -88,9 +114,9 @@ public class GameSimulator {
                     numbers[u] = Integer.parseInt(strnum[u + 1]);
                 }
                 //checks if the string has a mode for A
-                if (str2[1].substring(0,1).equals("#")|| str2[1].substring(0,1).equals("*")
-                        || str2[1].substring(0,1).equals("@")){
-                    modeA[x] = str2[1].substring(0,1);
+                if (str2[1].substring(0, 1).equals("#") || str2[1].substring(0, 1).equals("*")
+                        || str2[1].substring(0, 1).equals("@")) {
+                    modeA[x] = str2[1].substring(0, 1);
                 }
                 //checks if the string has mode for B
                 if (str2.length == 3) {
@@ -99,21 +125,38 @@ public class GameSimulator {
                         modeB[x] = str2[2].substring(0, 1);
                     }
                 }
-                //assigns the numbers to their appropiate field
+                //assigns the numbers to their appropriate field
                 Afield[x] = numbers[0];
                 Bfield[x] = numbers[1];
             }
         }
+    }
 
-
-        //outputting current location with 5 before and after
+    public void PrintWarriors(String[] inst, int position, String[] mA, String[] mB, int[] fA, int[] fB) {
         for (int i = -5; i < 6; i++) {
-            int k = (i + initialPos + MAX) % MAX;
+            int k = (i + position + MAX) % MAX;
             //System.out.println("k = "+k);
-            if (k == initialPos) {
-                System.out.println(k + ":" + instuction[k]+ " " + modeA[k]+Afield[k]+ "," + modeB[k]+Bfield[k]);
+            if (k == position) {
+                System.out.println(k + ":" + inst[k] + " " + mA[k] + fA[k] + "," + mB[k] + fB[k]);
+            } else {
+                System.out.println(k + ":" + inst[k] + " " + mA[k] + fA[k] + "," + mB[k] + fB[k]);
             }
-            else {  System.out.println(k + ":" + instuction[k]+ " " + modeA[k]+Afield[k]+ "," + modeB[k]+Bfield[k]);    }
+        }
+    }
+
+//method for checking if the initial position of second warrior is valid
+    public void checkPosition(int x1) {
+        boolean notValidPos = true;
+        while(notValidPos) {
+            int x2 = (int) ((Math.random() * (MAX + 1 - MIN)) + MIN);
+            if (x2 > x1) {
+                if (x2 - x1 > Player2.size()) {
+                    continue;
+                }
+            } else {
+                initialPos2 = x2;
+                break;
+            }
         }
     }
 }

@@ -7,11 +7,11 @@ public class OpenFile {
 
     //returns an array list
 
-    public static ArrayList<String> Openfile(){
+    public static ArrayList<String> Openfile(String nameOfFile){
         ArrayList<String> warrior = new ArrayList<String>();
 
         try {
-            File file = new File("Warrior1.txt");
+            File file = new File(nameOfFile);
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             StringBuffer stringBuffer = new StringBuffer();
