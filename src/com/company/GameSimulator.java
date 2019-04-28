@@ -172,28 +172,26 @@ public class GameSimulator {
 
     public void RunSimulation(String[] operation, String[] mode_A, String[] mode_B, int[] f_A, int[] f_B, int IndexPlayer1, int IndexPlayer2){
         int j;
-        int GameCounter = 0;    //for alternating between warriors; warrior 1 is odd and 2 is even
+        int GameCounter = 1;    //for alternating between warriors; warrior 1 is odd and 2 is even
         Instructions ObjOp = new Instructions(operation, mode_A, mode_B, f_A, f_B);
         while(noWinner) {
                //checking which warrior's turn
                if(GameCounter % 2 != 0){
                    IndexPlayer1 = KeepIndexWithinLimits(IndexPlayer1);
-                   j = IndexPlayer1;
+                   System.out.println("Index Player player checker " + IndexPlayer1);
+
+            j = IndexPlayer1;
                    IndexPlayer1++;
-                   System.out.println("\nwarrior 1 turn");
+                   //System.out.println("\nwarrior 1 turn");
                   // System.out.println("j = "+j);
                }
                else{
                    IndexPlayer2 = KeepIndexWithinLimits(IndexPlayer2);
                    j = IndexPlayer2;
                    IndexPlayer2++;
-                   System.out.println("\nwarrior 2 turn");
+                  // System.out.println("\nwarrior 2 turn");
                    //System.out.println("j = "+j);
-
                }
-//               System.out.println("before options");
-//               System.out.println("j = " + j);
-//               System.out.println("operation at j " + operation[j]);
 
                //checking instructions
                if(operation[j].equals("DAT")) {
@@ -202,18 +200,21 @@ public class GameSimulator {
                     break;
                 }
                 else if(operation[j].equals("MOV")){
-                    //System.out.println("j inside MOV " + j);
                     ObjOp.MOV(j); //instantiate MOV object
-                       // System.out.println("in MOV");
                 }
                 else if(operation[j].equals("ADD")){
                     ObjOp.ADD(j);
                }else if(operation[j].equals("SUB")){
-                   ObjOp.SUB(j);
-               }
-                else{
+                    ObjOp.SUB(j);
+               }else if(operation[j].equals("JMP")){
+                    System.out.println("GameCounter " + GameCounter);
+                   if(GameCounter % 2 == 1){    IndexPlayer1 = ObjOp.JMP(j); }
+                   else{    IndexPlayer2 = ObjOp.JMP(j);}
+                }else{
                   System.out.println("breaking from while");
                   break;}
+           // System.out.println("\nWarrior 1");
+           // PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
                 GameCounter++;
 
              // if(GameCounter == 4){ break;}

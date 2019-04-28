@@ -77,7 +77,6 @@ public class Instructions {
 //            MOV 2, 1
 //            DAT 1
 //            DAT 3        -----> MOV 2, 1
-            System.out.println("w " + w);
             command[w] = command[q];
             mA[w] = mA[q];
             mB[w] = mB[q];
@@ -144,8 +143,15 @@ public class Instructions {
         }
     }
 
-    public void JMP(int index){
-        
+    public int JMP(int index){
+        index = ObjLoopIndex.KeepIndexWithinLimits(index);
+        SetIndexesToZero();
+        CalcIndexes(index);
+        //ADD 4, 3      --->   keeps going back here
+        //MOV 0, 2
+        //JMP -2    A field only (can take *)
+        if(mA[index].equals("*")){  return q; }
+        else{   return a_x; }
     }
 
     public class JMZ{
