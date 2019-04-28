@@ -1,5 +1,5 @@
-ADD *2, @3
+ADD #2, @3
 DAT 4
 ADD 2, 1
-DAT 1
-DAT 9
+ADD #3, 1
+ADD #4, 6

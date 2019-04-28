@@ -20,13 +20,13 @@ public class Instructions {
 
     //method for finding looping indexes
     public void CalcIndexes(int index){
-        a_x = fA[index]+index;  // index using A field
-        a_x = ObjLoopIndex.KeepIndexWithinLimits(a_x);
-        b_x = fB[index]+index;  //index using B field
+        a_x = fA[index]+index;  // indirect index for A field
+        a_x = ObjLoopIndex.KeepIndexWithinLimits(a_x); //keep index between min and max
+        b_x = fB[index]+index;  //index using B field //indirect index for B field
         b_x = ObjLoopIndex.KeepIndexWithinLimits(b_x);
-        q = a_x + fA[a_x]; // indirect index using A field
+        q = a_x + fA[a_x]; //index for A field using * mode
         q = ObjLoopIndex.KeepIndexWithinLimits(q);
-        w = b_x + fB[b_x];  //indirect index using B field
+        w = b_x + fB[b_x];  //index for B field using @
         w = ObjLoopIndex.KeepIndexWithinLimits(w);
     }
 
@@ -103,26 +103,49 @@ public class Instructions {
         index = ObjLoopIndex.KeepIndexWithinLimits(index);
         SetIndexesToZero();
         CalcIndexes(index);
-        if (mA[index].equals("#")) {
+        if (mA[index].equals("#") && !"@".equals(mB[index])) {
             fB[b_x] = fA[index] + fB[b_x];
+        }else if(mA[index].equals("#") && mB[index].equals("@")){
+            fB[w] = fB[w] + fA[index];
         } else if (mA[index].equals("*") && !"@".equals(mB[index])) {
             fB[b_x] = fB[q] + fB[b_x];
+            fA[b_x] = fA[q] + fA[b_x];
         }else if(mB[index].equals("@") &&  !"*".equals(mA[index])) {
             fB[w] = fB[a_x] + fB[w];
+            fA[w] = fA[a_x] + fA[w];
         }else if(mB[index].equals("@") && mA[index].equals("*")){
             fB[w] = fB[w] + fB[q];
+            fA[w] = fA[w] + fA[q];
         } else{
-            System.out.println("fB "+fB[b_x]);
-            System.out.println("fA " + fA[a_x]);
             fB[b_x] = fB[a_x] + fB[b_x];
+            fA[b_x] = fA[a_x] + fA[b_x];
         }
     }
-    public class SUB{
-
+    public void SUB(int index){
+        index = ObjLoopIndex.KeepIndexWithinLimits(index);
+        SetIndexesToZero();
+        CalcIndexes(index);
+        if (mA[index].equals("#") && !"@".equals(mB[index])) {
+            fB[b_x] = fB[b_x] - fA[index];
+        }else if(mA[index].equals("#") && mB[index].equals("@")){
+            fB[w] = fB[w] - fA[index];
+        } else if (mA[index].equals("*") && !"@".equals(mB[index])) {
+            fB[b_x] = fB[b_x] - fB[q];
+            fA[b_x] = fA[b_x] - fA[q];
+        }else if(mB[index].equals("@") &&  !"*".equals(mA[index])) {
+            fB[w] = fB[w] - fB[a_x];
+            fA[w] = fA[w] - fA[a_x];
+        }else if(mB[index].equals("@") && mA[index].equals("*")){
+            fB[w] = fB[q] - fB[w];
+            fA[w] = fA[q] - fA[w];
+        } else{
+            fB[b_x] = fB[b_x] - fB[a_x];
+            fA[b_x] = fA[b_x] - fA[a_x];
+        }
     }
 
-    public class JMP{
-
+    public void JMP(int index){
+        
     }
 
     public class JMZ{

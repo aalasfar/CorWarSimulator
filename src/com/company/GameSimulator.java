@@ -208,7 +208,8 @@ public class GameSimulator {
                 }
                 else if(operation[j].equals("ADD")){
                     ObjOp.ADD(j);
-
+               }else if(operation[j].equals("SUB")){
+                   ObjOp.SUB(j);
                }
                 else{
                   System.out.println("breaking from while");
