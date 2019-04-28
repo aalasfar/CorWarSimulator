@@ -48,22 +48,27 @@ public class GameSimulator {
         //int j = initialPos; // used for assigning Player1 into the myArray (memory array)
         System.out.println("\nWarrior 1 ");
         System.out.println("initialPos = " + initialPos);
-        int sizeOfWarrior1 = PlacingWarrior(Player1, myArray, initialPos);
-        ExecuteSim(sizeOfWarrior1, initialPos, myArray, instruction, modeA, modeB, Afield, Bfield);
+        int sizeOfWarrior1 = PlacingInput(Player1, myArray, initialPos);
+        ParsingInput(sizeOfWarrior1, initialPos, myArray, instruction, modeA, modeB, Afield, Bfield);
         PrintWarriors(instruction, initialPos, modeA, modeB, Afield, Bfield);
 
         checkPosition(initialPos);
         System.out.println("\nWarrior 2 ");
         System.out.println("initialPos2 = "+ initialPos2);
-        int sizeOfWarrior2 = PlacingWarrior(Player2, myArray, initialPos2);
-        ExecuteSim(sizeOfWarrior2, initialPos2, myArray, instruction, modeA, modeB, Afield, Bfield);
+        int sizeOfWarrior2 = PlacingInput(Player2, myArray, initialPos2);
+        ParsingInput(sizeOfWarrior2, initialPos2, myArray, instruction, modeA, modeB, Afield, Bfield);
         PrintWarriors(instruction, initialPos2, modeA, modeB, Afield, Bfield);
         //int count = 0;  //count how many times iterated in Player1 for tracking size
 
-    }
+        System.out.println("noWinner " + noWinner);
+        RunSimulation(instruction, modeA, modeB, Afield, Bfield, initialPos, initialPos2);
+
+
+
+        }
 
     //method for placing warrior
-    public int PlacingWarrior(ArrayList<String> player, String[] memory, int position) {
+    public int PlacingInput(ArrayList<String> player, String[] memory, int position) {
         ArrayList<String> p = new ArrayList<String>();
         p = player;
         int k = 0;
@@ -83,7 +88,7 @@ public class GameSimulator {
     }
     //method for executing the instructions in memory
     //inputs the program into the main array so i can then be executed
-    public void ExecuteSim(int count, int position, String[] array, String[] instruction, String[] mA, String[] mB, int[] fA, int[] fB) {
+    public void ParsingInput(int count, int position, String[] array, String[] instruction, String[] mA, String[] mB, int[] fA, int[] fB) {
         for (int i = 0; i < count; i++) {
             /*uses count from previous loop of getting each line to know how many lines to
             change  */
@@ -159,4 +164,73 @@ public class GameSimulator {
             }
         }
     }
+
+    //method for keeping index within limits
+    public int KeepIndexWithinLimits(int index){
+        return index % MAX;
+    }
+
+    public void RunSimulation(String[] operation, String[] mode_A, String[] mode_B, int[] f_A, int[] f_B, int IndexPlayer1, int IndexPlayer2){
+            int j;
+            int GameCounter = 0;    //for alternating between warriors; warrior 1 is odd and 2 is even
+            Instructions ObjOp = new Instructions();
+           while(noWinner) {
+               //checking which warrior's turn
+               if(GameCounter % 2 != 0){
+                   IndexPlayer1 = KeepIndexWithinLimits(IndexPlayer1);
+                   j = IndexPlayer1;
+                   IndexPlayer1++;
+                   System.out.println("\nwarrior 1 turn");
+                  // System.out.println("j = "+j);
+               }
+               else{
+                   IndexPlayer2 = KeepIndexWithinLimits(IndexPlayer2);
+                   j = IndexPlayer2;
+                   IndexPlayer2++;
+                   System.out.println("\nwarrior 2 turn");
+                   //System.out.println("j = "+j);
+
+               }
+//               System.out.println("before options");
+//               System.out.println("j = " + j);
+//               System.out.println("operation at j " + operation[j]);
+
+               //checking instructions
+               if(operation[j].equals("DAT")) {
+                    ObjOp.DAT(operation[j], f_B[j]); //instantiate DAT object
+                    System.out.println("Reach a DAT");
+                    break;
+                }
+                else if(operation[j].equals("MOV")){
+                    //System.out.println("j inside MOV " + j);
+                    ObjOp.MOV(operation, mode_A, mode_B, f_A, f_B, j); //instantiate MOV object
+                       // System.out.println("in MOV");
+                        //break;
+                }
+
+              else{
+                  System.out.println("breaking from while");
+                  break;}
+                GameCounter++;
+
+             // if(GameCounter == 4){ break;}
+           }
+        System.out.println("\nWarrior 1");
+        PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
+
+       System.out.println("\nWarrior 2");
+       PrintWarriors(operation, IndexPlayer2, mode_A, mode_B, f_A, f_B);
+       if(GameCounter % 2 == 0){
+           System.out.println("Warrior 1 is the Winner!");
+       }
+       else{
+           System.out.println("Warrior 2 is the Winner!");
+       }
+
+
+    }
+
+
+
+
 }
