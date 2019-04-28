@@ -171,10 +171,10 @@ public class GameSimulator {
     }
 
     public void RunSimulation(String[] operation, String[] mode_A, String[] mode_B, int[] f_A, int[] f_B, int IndexPlayer1, int IndexPlayer2){
-        int j;
-        int GameCounter = 0;    //for alternating between warriors; warrior 1 is odd and 2 is even
-        Instructions ObjOp = new Instructions(operation, mode_A, mode_B, f_A, f_B);
-        while(noWinner) {
+            int j;
+            int GameCounter = 0;    //for alternating between warriors; warrior 1 is odd and 2 is even
+            Instructions ObjOp = new Instructions();
+           while(noWinner) {
                //checking which warrior's turn
                if(GameCounter % 2 != 0){
                    IndexPlayer1 = KeepIndexWithinLimits(IndexPlayer1);
@@ -197,20 +197,18 @@ public class GameSimulator {
 
                //checking instructions
                if(operation[j].equals("DAT")) {
-                   ObjOp.DAT(j); //instantiate DAT object
+                    ObjOp.DAT(operation[j], f_B[j]); //instantiate DAT object
                     System.out.println("Reach a DAT");
                     break;
                 }
                 else if(operation[j].equals("MOV")){
                     //System.out.println("j inside MOV " + j);
-                    ObjOp.MOV(j); //instantiate MOV object
+                    ObjOp.MOV(operation, mode_A, mode_B, f_A, f_B, j); //instantiate MOV object
                        // System.out.println("in MOV");
+                        //break;
                 }
-                else if(operation[j].equals("ADD")){
-                    ObjOp.ADD(j);
 
-               }
-                else{
+              else{
                   System.out.println("breaking from while");
                   break;}
                 GameCounter++;

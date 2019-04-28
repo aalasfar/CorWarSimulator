@@ -1,29 +1,47 @@
 package com.company;
 
 public class Instructions {
-/*Each class still needs to have its parameters determined but should be the same
-for all classes */
+
+    int a_x, b_x, q, w;
+    int[] fA, fB;
+    String[] command, mA, mB;
+
+    //constructor
+    public Instructions(String[] command, String[] mA, String[] mB, int[] fA, int[] fB){
+        this.command = command; this.mA = mA; this.mB = mB; this.fA = fA; this.fB = fB;
+    }
 
     GameSimulator ObjLoopIndex = new GameSimulator();   //object for looping index
 
-    public void DAT(String command, int b){
-    /*only keeps a value in the b field but if executed player loses*/
-        command = "DAT";
+    //method for setting indexes to 0
+    public void SetIndexesToZero(){
+        a_x = 0; b_x = 0; q = 0; w = 0;
     }
 
-    public void MOV(String[] command, String[] mA, String[] mB, int[] fA, int[] fB, int index) {
+    //method for finding looping indexes
+    public void CalcIndexes(int index){
+        a_x = fA[index]+index;  // index using A field
+        a_x = ObjLoopIndex.KeepIndexWithinLimits(a_x);
+        b_x = fB[index]+index;  //index using B field
+        b_x = ObjLoopIndex.KeepIndexWithinLimits(b_x);
+        q = a_x + fA[a_x]; // indirect index using A field
+        q = ObjLoopIndex.KeepIndexWithinLimits(q);
+        w = b_x + fB[b_x];  //indirect index using B field
+        w = ObjLoopIndex.KeepIndexWithinLimits(w);
+    }
+
+    public void DAT(int index){
+    /*only keeps a value in the b field but if executed player loses*/
+        command[index] = "DAT";
+    }
+
+    public void MOV(int index) {
     /*Takes instruction from address determined by A and B field and copies it to
     new address also depending on A and B field*/
         //******** keep index between 0 and 7999************/
-            index = ObjLoopIndex.KeepIndexWithinLimits(index);
-        int a_x = fA[index]+index;  // index using A field
-            a_x = ObjLoopIndex.KeepIndexWithinLimits(a_x);
-        int b_x = fB[index]+index;  //index using B field
-            b_x = ObjLoopIndex.KeepIndexWithinLimits(b_x);
-        int q = a_x + fA[a_x]; // indirect index using A field
-            q = ObjLoopIndex.KeepIndexWithinLimits(q);
-        int w = b_x + fB[b_x];  //indirect index using B field
-            w = ObjLoopIndex.KeepIndexWithinLimits(w);
+        index = ObjLoopIndex.KeepIndexWithinLimits(index);
+        SetIndexesToZero();
+        CalcIndexes(index);
 
         if (mA[index].equals("#")) {
             //puts A field value in B field at the B field target
@@ -80,10 +98,25 @@ for all classes */
             // this worked !!
         }
     }
-    public class ADD{
 
+    public void ADD(int index) {
+        index = ObjLoopIndex.KeepIndexWithinLimits(index);
+        SetIndexesToZero();
+        CalcIndexes(index);
+        if (mA[index].equals("#")) {
+            fB[b_x] = fA[index] + fB[b_x];
+        } else if (mA[index].equals("*") && !"@".equals(mB[index])) {
+            fB[b_x] = fB[q] + fB[b_x];
+        }else if(mB[index].equals("@") &&  !"*".equals(mA[index])) {
+            fB[w] = fB[a_x] + fB[w];
+        }else if(mB[index].equals("@") && mA[index].equals("*")){
+            fB[w] = fB[w] + fB[q];
+        } else{
+            System.out.println("fB "+fB[b_x]);
+            System.out.println("fA " + fA[a_x]);
+            fB[b_x] = fB[a_x] + fB[b_x];
+        }
     }
-
     public class SUB{
 
     }
