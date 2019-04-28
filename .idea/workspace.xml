@@ -28,7 +28,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Warrior2.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
+            <state relative-caret-position="51">
               <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
             </state>
           </provider>
@@ -58,15 +58,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/GameSimulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="230" lean-forward="true" selection-start-line="230" selection-end-line="230" />
+            <state relative-caret-position="1479">
+              <caret line="236" lean-forward="true" selection-start-line="236" selection-end-line="236" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#150#158#0" expanded="true" />
                 <element signature="e#211#219#0" expanded="true" />
-                <element signature="e#2649#2657#0" expanded="true" />
-                <element signature="e#6905#6906#0" expanded="true" />
-                <element signature="e#6939#6940#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,8 +72,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Instructions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+            <state relative-caret-position="-1224">
+              <caret line="33" column="70" selection-start-line="33" selection-start-column="70" selection-end-line="33" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -204,7 +201,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48229000" />
+    <option name="totallyTimeSpent" value="48235000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
@@ -316,22 +313,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Warrior2.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="51">
           <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/GameSimulator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="230" lean-forward="true" selection-start-line="230" selection-end-line="230" />
+        <state relative-caret-position="1479">
+          <caret line="236" lean-forward="true" selection-start-line="236" selection-end-line="236" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#150#158#0" expanded="true" />
             <element signature="e#211#219#0" expanded="true" />
-            <element signature="e#2649#2657#0" expanded="true" />
-            <element signature="e#6905#6906#0" expanded="true" />
-            <element signature="e#6939#6940#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -345,8 +339,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Instructions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+        <state relative-caret-position="-1224">
+          <caret line="33" column="70" selection-start-line="33" selection-start-column="70" selection-end-line="33" selection-end-column="70" />
         </state>
       </provider>
     </entry>
