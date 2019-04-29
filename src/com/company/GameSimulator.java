@@ -210,6 +210,11 @@ public class GameSimulator {
                     System.out.println("GameCounter " + GameCounter);
                    if(GameCounter % 2 == 1){    IndexPlayer1 = ObjOp.JMP(j); }
                    else{    IndexPlayer2 = ObjOp.JMP(j);}
+                }
+                else if(operation[j].equals("JMZ")){
+                System.out.println("GameCounter " + GameCounter);
+                if(GameCounter % 2 == 1){    IndexPlayer1 = ObjOp.JMZ(j); }
+                else{    IndexPlayer2 = ObjOp.JMZ(j);}
                 }else{
                   System.out.println("breaking from while");
                   break;}

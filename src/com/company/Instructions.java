@@ -154,8 +154,39 @@ public class Instructions {
         else{   return a_x; }
     }
 
-    public class JMZ{
-
+    public int JMZ(int index) {
+        index = ObjLoopIndex.KeepIndexWithinLimits(index);
+        SetIndexesToZero();
+        CalcIndexes(index);
+        if (mB[index].equals("#")) {
+            if (fB[index] == 0) {
+                if (mA[index].equals("*")) {
+                    return q;
+                } else {
+                    return a_x;
+                }
+            }
+            //else {
+            //}
+        }
+        if (mB[index].equals("@")) {
+            if (fB[w] == 0) {
+                if (mA[index].equals("*")) {
+                    return q;
+                } else {
+                    return a_x;
+                }
+            }
+        } else {
+            if (fB[b_x] == 0) {
+                if (mA[index].equals("*")) {
+                    return q;
+                } else {
+                    return a_x;
+                }
+            }
+        }
+        return 0;
     }
 
     public class DJN{
