@@ -12,7 +12,7 @@ Team Name: Endgame
 [//]: # (Write [x] to mark off what was accomplished.<br/>)
 The following **required** functionality is complete:
 
-* [ ] Two Warrior Files can be loaded into core
+* [ ] Two Warrior Files can be loaded into core *
 The following instructions work correctly:
 - [ ] MOV 
 - [ ] ADD
