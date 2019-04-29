@@ -170,76 +170,85 @@ public class GameSimulator {
         return index % MAX;
     }
 
-    public void RunSimulation(String[] operation, String[] mode_A, String[] mode_B, int[] f_A, int[] f_B, int IndexPlayer1, int IndexPlayer2){
+    public void RunSimulation(String[] operation, String[] mode_A, String[] mode_B, int[] f_A, int[] f_B, int IndexPlayer1, int IndexPlayer2) {
         int j;
         int GameCounter = 1;    //for alternating between warriors; warrior 1 is odd and 2 is even
         Instructions ObjOp = new Instructions(operation, mode_A, mode_B, f_A, f_B);
-        while(noWinner) {
-               //checking which warrior's turn
-               if(GameCounter % 2 != 0){
-                   IndexPlayer1 = KeepIndexWithinLimits(IndexPlayer1);
-                   System.out.println("Index Player player checker " + IndexPlayer1);
+        while (noWinner) {
+            //checking which warrior's turn
+            if (GameCounter % 2 != 0) {
+                IndexPlayer1 = KeepIndexWithinLimits(IndexPlayer1);
+                System.out.println("Index Player player checker " + IndexPlayer1);
 
-            j = IndexPlayer1;
-                   IndexPlayer1++;
-                   //System.out.println("\nwarrior 1 turn");
-                  // System.out.println("j = "+j);
-               }
-               else{
-                   IndexPlayer2 = KeepIndexWithinLimits(IndexPlayer2);
-                   j = IndexPlayer2;
-                   IndexPlayer2++;
-                  // System.out.println("\nwarrior 2 turn");
-                   //System.out.println("j = "+j);
-               }
+                j = IndexPlayer1;
+                IndexPlayer1++;
+                //System.out.println("\nwarrior 1 turn");
+                // System.out.println("j = "+j);
+            } else {
+                IndexPlayer2 = KeepIndexWithinLimits(IndexPlayer2);
+                j = IndexPlayer2;
+                IndexPlayer2++;
+                // System.out.println("\nwarrior 2 turn");
+                //System.out.println("j = "+j);
+            }
 
-               //checking instructions
-               if(operation[j].equals("DAT")) {
-                   ObjOp.DAT(j); //instantiate DAT object
-                    System.out.println("Reach a DAT");
+            //checking instructions
+            if (operation[j].equals("DAT")) {
+                ObjOp.DAT(j); //instantiate DAT object
+                System.out.println("Reach a DAT");
+                break;
+            } else if (operation[j].equals("MOV")) {
+                ObjOp.MOV(j); //instantiate MOV object
+            } else if (operation[j].equals("ADD")) {
+                ObjOp.ADD(j);
+            } else if (operation[j].equals("SUB")) {
+                ObjOp.SUB(j);
+            } else if (operation[j].equals("JMP")) {
+                //System.out.println("GameCounter " + GameCounter);
+                if (GameCounter % 2 == 1) {
+                    IndexPlayer1 = ObjOp.JMP(j);
+                } else {
+                    IndexPlayer2 = ObjOp.JMP(j);
+                }
+            } else if (operation[j].equals("JMZ")) {
+                //System.out.println("GameCounter " + GameCounter);
+                if (GameCounter % 2 == 1) {
+                    IndexPlayer1 = ObjOp.JMZ(j);
+                    if (IndexPlayer1 == 1000000) {
+                        System.out.println("Something wrong");
+                        break;
+                    } else {
+                        IndexPlayer2 = ObjOp.JMZ(j);
+                        if (IndexPlayer2 == 1000000) {
+                            System.out.println("something wrong");
+                            break;
+                        }
+                    }
+                } else {
+                    System.out.println("breaking from while");
                     break;
                 }
-                else if(operation[j].equals("MOV")){
-                    ObjOp.MOV(j); //instantiate MOV object
-                }
-                else if(operation[j].equals("ADD")){
-                    ObjOp.ADD(j);
-               }else if(operation[j].equals("SUB")){
-                    ObjOp.SUB(j);
-               }else if(operation[j].equals("JMP")){
-                    System.out.println("GameCounter " + GameCounter);
-                   if(GameCounter % 2 == 1){    IndexPlayer1 = ObjOp.JMP(j); }
-                   else{    IndexPlayer2 = ObjOp.JMP(j);}
-                }
-                else if(operation[j].equals("JMZ")){
-                System.out.println("GameCounter " + GameCounter);
-                if(GameCounter % 2 == 1){    IndexPlayer1 = ObjOp.JMZ(j); }
-                else{    IndexPlayer2 = ObjOp.JMZ(j);}
-                }else{
-                  System.out.println("breaking from while");
-                  break;}
-           // System.out.println("\nWarrior 1");
-           // PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
+                // System.out.println("\nWarrior 1");
+                // PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
                 GameCounter++;
 
-             // if(GameCounter == 4){ break;}
-           }
-        System.out.println("\nWarrior 1");
-        PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
+                // if(GameCounter == 4){ break;}
+            }
+            System.out.println("\nWarrior 1");
+            PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
 
-       System.out.println("\nWarrior 2");
-       PrintWarriors(operation, IndexPlayer2, mode_A, mode_B, f_A, f_B);
-       if(GameCounter % 2 == 0){
-           System.out.println("Warrior 1 is the Winner!");
-       }
-       else{
-           System.out.println("Warrior 2 is the Winner!");
-       }
+            System.out.println("\nWarrior 2");
+            PrintWarriors(operation, IndexPlayer2, mode_A, mode_B, f_A, f_B);
+            if (GameCounter % 2 == 0) {
+                System.out.println("Warrior 1 is the Winner!");
+            } else {
+                System.out.println("Warrior 2 is the Winner!");
+            }
+
+
+        }
 
 
     }
-
-
-
 
 }

@@ -158,7 +158,21 @@ public class Instructions {
         index = ObjLoopIndex.KeepIndexWithinLimits(index);
         SetIndexesToZero();
         CalcIndexes(index);
-        if (mB[index].equals("#")) {
+
+        if(mB[index].equals("#") && fB[index] == 0){
+            if(mA[index].equals("*")){  return q; }
+            else{   return a_x;}
+        }else if(mB[index].equals("@")) {
+            if (fB[b_x] == 0) {
+                if (mA[index].equals("*")) {
+                    return q;
+                } else {
+                    return a_x;
+                }
+            }
+        }  return 1000000;
+    }
+        /*if (mB[index].equals("#")) {
             if (fB[index] == 0) {
                 if (mA[index].equals("*")) {
                     return q;
@@ -169,7 +183,7 @@ public class Instructions {
             //else {
             //}
         }
-        if (mB[index].equals("@")) {
+        else if (mB[index].equals("@")) {
             if (fB[w] == 0) {
                 if (mA[index].equals("*")) {
                     return q;
@@ -187,9 +201,32 @@ public class Instructions {
             }
         }
         return 0;
-    }
+    }*/
 
-    public class DJN{
+    public int DJN(int index){
+        index = ObjLoopIndex.KeepIndexWithinLimits(index);
+        SetIndexesToZero();
+        CalcIndexes(index);
+
+        if(mB[index].equals("#")){
+            fB[index] = fB[index] - 1;
+            if(fB[index] == 0){
+                if (mA[index].equals("*")) {
+                    return q;
+                } else {
+                    return a_x;
+                }
+            }
+        }else if(mB[index].equals("@")) {
+            fB[b_x] = fB[b_x] - 1;
+            if (fB[b_x] == 0) {
+                if (mA[index].equals("*")) {
+                    return q;
+                } else {
+                    return a_x;
+                }
+            }
+        }  return 1000000;
 
     }
 
