@@ -13,7 +13,7 @@ Team Name: Endgame
 The following **required** functionality is complete:
 
 * [ ] Two Warrior Files can be loaded into core *
-The following instructions work correctly:
+* The following instructions work correctly:
 - [ ] MOV 
 - [ ] ADD
 - [ ] SUB
