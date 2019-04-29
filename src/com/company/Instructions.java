@@ -7,22 +7,29 @@ public class Instructions {
     String[] command, mA, mB;
 
     //constructor
-    public Instructions(String[] command, String[] mA, String[] mB, int[] fA, int[] fB){
-        this.command = command; this.mA = mA; this.mB = mB; this.fA = fA; this.fB = fB;
+    public Instructions(String[] command, String[] mA, String[] mB, int[] fA, int[] fB) {
+        this.command = command;
+        this.mA = mA;
+        this.mB = mB;
+        this.fA = fA;
+        this.fB = fB;
     }
 
     GameSimulator ObjLoopIndex = new GameSimulator();   //object for looping index
 
     //method for setting indexes to 0
-    public void SetIndexesToZero(){
-        a_x = 0; b_x = 0; q = 0; w = 0;
+    public void SetIndexesToZero() {
+        a_x = 0;
+        b_x = 0;
+        q = 0;
+        w = 0;
     }
 
     //method for finding looping indexes
-    public void CalcIndexes(int index){
-        a_x = fA[index]+index;  // indirect index for A field
+    public void CalcIndexes(int index) {
+        a_x = fA[index] + index;  // indirect index for A field
         a_x = ObjLoopIndex.KeepIndexWithinLimits(a_x); //keep index between min and max
-        b_x = fB[index]+index;  //index using B field //indirect index for B field
+        b_x = fB[index] + index;  //index using B field //indirect index for B field
         b_x = ObjLoopIndex.KeepIndexWithinLimits(b_x);
         q = a_x + fA[a_x]; //index for A field using * mode
         q = ObjLoopIndex.KeepIndexWithinLimits(q);
@@ -30,9 +37,14 @@ public class Instructions {
         w = ObjLoopIndex.KeepIndexWithinLimits(w);
     }
 
-    public void DAT(int index){
-    /*only keeps a value in the b field but if executed player loses*/
-        command[index] = "DAT";
+    public void DAT(int index) {
+        if(mB[index].equals("#")){
+            fB[index] = fB[index];}
+        else if(!"#".equals(mB[index]) && !"@".equals(mB[index])){
+            fB[b_x] = fB[index];
+        }else if(mB[index].equals("@")){
+            fB[w] = fB[index];
+        }
     }
 
     public void MOV(int index) {
@@ -44,57 +56,32 @@ public class Instructions {
         CalcIndexes(index);
 
         if (mA[index].equals("#")) {
-            //puts A field value in B field at the B field target
-            // MOV #2, 1    ------->    MOV #2, 1
-            // ADD 2, @3                ADD 2, @2
             fB[b_x] = fA[index];
         } else if (mA[index].equals("*") && !"@".equals(mB[index])) {
-            // 300: MOV *1, 1    ------->    MOV *1, 1
-            // 301: ADD 1, @2                DAT 0, 3
-            // 302: DAT 0, 3                 DAT 0, 3
             command[b_x] = command[q];
             mA[b_x] = mA[q];
             mB[b_x] = mB[q];
             fA[b_x] = fA[q];
             fB[b_x] = fB[q];
-            //System.out.println("*");
-            //works correctly!
-        } else if(mB[index].equals("@") && !"*".equals(mA[index])){
-            // 300: MOV 2, @1    ------->    MOV 2, @1
-            // 301: DAT 0, 2                 DAT 0, 2
-            // 302: ADD 4, 3                 ADD 4, 3
-            // 303: ADD 3, 2                 ADD 4, 3
+        } else if (mB[index].equals("@") && !"*".equals(mA[index])) {
             command[w] = command[a_x];
             mA[w] = mA[a_x];
             mB[w] = mB[a_x];
             fA[w] = fA[a_x];
             fB[w] = fB[a_x];
             // works correctly!
-        }
-        else if(mB[index].equals("@") && mA[index].equals("*")){
-//            MOV *1, @3
-//            MOV 1, 2
-//            MOV 2, 1
-//            DAT 1
-//            DAT 3        -----> MOV 2, 1
+        } else if (mB[index].equals("@") && mA[index].equals("*")) {
             command[w] = command[q];
             mA[w] = mA[q];
             mB[w] = mB[q];
             fA[w] = fA[q];
             fB[w] = fB[q];
-
-        }else {
-            //say index is 300
-            //300: MOV 1, 2
-            //301: ADD #4, @1    Afield = 4, Bfield = 1
-            //302: ADD 2, 3      Afield = 2, Bfield = 3
-            //System.out.println("Are we here!?");
+        } else {
             command[b_x] = command[a_x];     //copying instruction
             mA[b_x] = mA[a_x];                  //copying mode A
             mB[b_x] = mB[a_x];                  //copying mode B
             fA[b_x] = fA[a_x];                  //copying field A
             fB[b_x] = fB[a_x];
-            // this worked !!
         }
     }
 
@@ -104,54 +91,58 @@ public class Instructions {
         CalcIndexes(index);
         if (mA[index].equals("#") && !"@".equals(mB[index])) {
             fB[b_x] = fA[index] + fB[b_x];
-        }else if(mA[index].equals("#") && mB[index].equals("@")){
+        } else if (mA[index].equals("#") && mB[index].equals("@")) {
             fB[w] = fB[w] + fA[index];
         } else if (mA[index].equals("*") && !"@".equals(mB[index])) {
             fB[b_x] = fB[q] + fB[b_x];
             fA[b_x] = fA[q] + fA[b_x];
-        }else if(mB[index].equals("@") &&  !"*".equals(mA[index])) {
+        } else if (mB[index].equals("@") && !"*".equals(mA[index])) {
             fB[w] = fB[a_x] + fB[w];
             fA[w] = fA[a_x] + fA[w];
-        }else if(mB[index].equals("@") && mA[index].equals("*")){
+        } else if (mB[index].equals("@") && mA[index].equals("*")) {
             fB[w] = fB[w] + fB[q];
             fA[w] = fA[w] + fA[q];
-        } else{
+        } else {
             fB[b_x] = fB[a_x] + fB[b_x];
             fA[b_x] = fA[a_x] + fA[b_x];
         }
     }
-    public void SUB(int index){
+
+    public void SUB(int index) {
         index = ObjLoopIndex.KeepIndexWithinLimits(index);
         SetIndexesToZero();
         CalcIndexes(index);
         if (mA[index].equals("#") && !"@".equals(mB[index])) {
             fB[b_x] = fB[b_x] - fA[index];
-        }else if(mA[index].equals("#") && mB[index].equals("@")){
+        } else if (mA[index].equals("#") && mB[index].equals("@")) {
             fB[w] = fB[w] - fA[index];
         } else if (mA[index].equals("*") && !"@".equals(mB[index])) {
             fB[b_x] = fB[b_x] - fB[q];
             fA[b_x] = fA[b_x] - fA[q];
-        }else if(mB[index].equals("@") &&  !"*".equals(mA[index])) {
+        } else if (mB[index].equals("@") && !"*".equals(mA[index])) {
             fB[w] = fB[w] - fB[a_x];
             fA[w] = fA[w] - fA[a_x];
-        }else if(mB[index].equals("@") && mA[index].equals("*")){
+        } else if (mB[index].equals("@") && mA[index].equals("*")) {
             fB[w] = fB[q] - fB[w];
             fA[w] = fA[q] - fA[w];
-        } else{
+        } else {
             fB[b_x] = fB[b_x] - fB[a_x];
             fA[b_x] = fA[b_x] - fA[a_x];
         }
     }
 
-    public int JMP(int index){
+    public int JMP(int index) {
         index = ObjLoopIndex.KeepIndexWithinLimits(index);
         SetIndexesToZero();
         CalcIndexes(index);
         //ADD 4, 3      --->   keeps going back here
         //MOV 0, 2
         //JMP -2    A field only (can take *)
-        if(mA[index].equals("*")){  return q; }
-        else{   return a_x; }
+        if (mA[index].equals("*")) {
+            return q;
+        } else {
+            return a_x;
+        }
     }
 
     public int JMZ(int index) {
@@ -159,10 +150,13 @@ public class Instructions {
         SetIndexesToZero();
         CalcIndexes(index);
 
-        if(mB[index].equals("#") && fB[index] == 0){
-            if(mA[index].equals("*")){  return q; }
-            else{   return a_x;}
-        }else if(mB[index].equals("@")) {
+        if (mB[index].equals("#") && fB[index] == 0) {
+            if (mA[index].equals("*")) {
+                return q;
+            } else {
+                return a_x;
+            }
+        } else if (mB[index].equals("@")) {
             if (fB[b_x] == 0) {
                 if (mA[index].equals("*")) {
                     return q;
@@ -170,72 +164,58 @@ public class Instructions {
                     return a_x;
                 }
             }
-        }  return 1000000;
+        }
+        return 1000000;
     }
-        /*if (mB[index].equals("#")) {
-            if (fB[index] == 0) {
-                if (mA[index].equals("*")) {
-                    return q;
-                } else {
-                    return a_x;
-                }
-            }
-            //else {
-            //}
-        }
-        else if (mB[index].equals("@")) {
-            if (fB[w] == 0) {
-                if (mA[index].equals("*")) {
-                    return q;
-                } else {
-                    return a_x;
-                }
-            }
-        } else {
-            if (fB[b_x] == 0) {
-                if (mA[index].equals("*")) {
-                    return q;
-                } else {
-                    return a_x;
-                }
-            }
-        }
-        return 0;
-    }*/
 
-    public int DJN(int index){
+    public int DJN(int index) {
         index = ObjLoopIndex.KeepIndexWithinLimits(index);
         SetIndexesToZero();
         CalcIndexes(index);
 
-        if(mB[index].equals("#")){
+        if (mB[index].equals("#")) {
+            System.out.println("we are in #");
             fB[index] = fB[index] - 1;
-            if(fB[index] == 0){
+            if (fB[index] != 0) {
+                if (mA[index].equals("*")) {
+                    return q;
+                } else if(!"*".equals(mA[index])) {
+                    return a_x;
+                }
+            }
+        } else if (mB[index].equals("@")) {
+            System.out.println("we are in @");
+            fB[w] = fB[w] - 1;
+            if (fB[w] != 0) {
                 if (mA[index].equals("*")) {
                     return q;
                 } else {
                     return a_x;
                 }
             }
-        }else if(mB[index].equals("@")) {
+        }else if(!"#".equals(mB[index]) && !"@".equals(mB[index])){
             fB[b_x] = fB[b_x] - 1;
-            if (fB[b_x] == 0) {
-                if (mA[index].equals("*")) {
-                    return q;
-                } else {
-                    return a_x;
-                }
+            System.out.println("fB " + fB[b_x]);
+            if (fB[w] != 0) {
+                if (mA[index].equals("*")) { return q;  }
+                else{ return a_x;     }
             }
-        }  return 1000000;
-
+        }return 1000000;
     }
 
-    public class CMP{
-
+    public int CMP(int index) {
+        if (mB[index].equals("#")) {
+            if (fA[index] == fB[index]) {
+                return index + 1;
+            } else {
+                return index;
+            }
+        } else if (mA[index].equals("*") && mB[index].equals("@")) {
+            if(command[q]==command[w] && mA[q]==mA[w] && mB[q]==mB[w] && fA[q]==fA[w] && fB[q]==fB[w]){
+                return index + 1; }
+            else {return index; }
+        }else{  return index;   }
     }
 
-    public class SPL{
-
-    }
 
 }
