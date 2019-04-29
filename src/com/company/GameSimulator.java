@@ -211,7 +211,6 @@ public class GameSimulator {
                     IndexPlayer2 = ObjOp.JMP(j);
                 }
             } else if (operation[j].equals("JMZ")) {
-                //System.out.println("GameCounter " + GameCounter);
                 if (GameCounter % 2 == 1) {
                     IndexPlayer1 = ObjOp.JMZ(j);
                     if (IndexPlayer1 == 1000000) {
@@ -224,7 +223,21 @@ public class GameSimulator {
                             break;
                         }
                     }
-                } else {
+                    }else if (operation[j].equals("DJN")) {
+                        if (GameCounter % 2 == 1) {
+                            IndexPlayer1 = ObjOp.DJN(j);
+                            if (IndexPlayer1 == 1000000) {
+                                System.out.println("Something wrong");
+                                break;
+                            } else {
+                                IndexPlayer2 = ObjOp.DJN(j);
+                                if (IndexPlayer2 == 1000000) {
+                                    System.out.println("something wrong");
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
                     System.out.println("breaking from while");
                     break;
                 }
