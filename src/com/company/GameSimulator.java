@@ -106,52 +106,55 @@ public class GameSimulator {
                 }
                 Bfield[x] = numbers[0];*/
             //} else {
-                String str = s.replaceAll("[^-?0-9]+", " ");
-                //gets numbers from the string
-                String strnum[] = str.split(" ");
-                String[] str2 = new String[3];
-                str2 = s.split(" ");
-                //splits string into 3 to get the mode
-                int[] numbers = new int[strnum.length];
-                //array to change the numbers from string to int
-                for (int u = 0; u < strnum.length - 1; u++) {
-                    numbers[u] = Integer.parseInt(strnum[u + 1]);
-                }
-                //checks if the string has a mode for A
+            String str = s.replaceAll("[^-?0-9]+", " ");
+            //gets numbers from the string
+            String strnum[] = str.split(" ");
+            String[] str2 = new String[3];
+            str2 = s.split(" ");
+            //splits string into 3 to get the mode
+            int[] numbers = new int[strnum.length];
+            //array to change the numbers from string to int
+            for (int u = 0; u < strnum.length - 1; u++) {
+                numbers[u] = Integer.parseInt(strnum[u + 1]);
+            }
+            //checks if the string has a mode for A
             if (!instruction[x].equals("DAT")) {
                 if (str2[1].substring(0, 1).equals("#") || str2[1].substring(0, 1).equals("*")
                         || str2[1].substring(0, 1).equals("@")) {
                     modeA[x] = str2[1].substring(0, 1);
                 }
             }
-                //checks if the string has mode for B
-                if (str2.length == 3) {
-                    if (str2[2].substring(0, 1).equals("#") || str2[2].substring(0, 1).equals("*")
-                            || str2[2].substring(0, 1).equals("@")) {
-                        modeB[x] = str2[2].substring(0, 1);
-                    }
-                }
-                //assigns the numbers to their appropriate field
-                if(!instruction[x].equals("DAT")){
-                    Afield[x] = numbers[0];
-                    Bfield[x] = numbers[1];
-                } else{
-                    Afield[x] = 0;  Bfield[x] = numbers[0]; modeB[x] = str2[1].substring(0,1);
+            //checks if the string has mode for B
+            if (str2.length == 3) {
+                if (str2[2].substring(0, 1).equals("#") || str2[2].substring(0, 1).equals("*")
+                        || str2[2].substring(0, 1).equals("@")) {
+                    modeB[x] = str2[2].substring(0, 1);
                 }
             }
+            //assigns the numbers to their appropriate field
+            if (!instruction[x].equals("DAT")) {
+                Afield[x] = numbers[0];
+                Bfield[x] = numbers[1];
+            } else {
+                Afield[x] = 0;
+                Bfield[x] = numbers[0];
+                modeB[x] = str2[1].substring(0, 1);
+            }
         }
-  //  }
+    }
+    //  }
 
     public void PrintWarriors(String[] inst, int position, String[] mA, String[] mB, int[] fA, int[] fB) {
         for (int i = -5; i < 6; i++) {
             int k = (i + position + MAX) % MAX;
             //System.out.println("k = "+k);
             if (k == position) {
-                System.out.println(String.format("%04d",k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
+                System.out.println(String.format("%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
             } else {
-                System.out.println(String.format("%04d",k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
+                System.out.println(String.format("%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
             }
-        }   System.out.println("\n");
+        }
+        System.out.println("\n");
     }
 
     //method for checking if the initial position of second warrior is valid
@@ -227,10 +230,10 @@ public class GameSimulator {
                 System.out.println("JMP is being called");
                 if (GameCounter % 2 == 1) {
                     IndexPlayer1 = ObjOp.JMP(j);
-             //       System.out.println("IndexPlayer1 " + IndexPlayer1);
+                    //       System.out.println("IndexPlayer1 " + IndexPlayer1);
                 } else {
                     IndexPlayer2 = ObjOp.JMP(j);
-               //     System.out.println("IndexPlayer2 " + IndexPlayer2);
+                    //     System.out.println("IndexPlayer2 " + IndexPlayer2);
                 }
             } else if (operation[j].equals("JMZ")) {
                 System.out.println("in JMZ");
@@ -252,21 +255,24 @@ public class GameSimulator {
             } else if (operation[j].equals("DJN")) {
                 System.out.println("in DJN");
                 if (GameCounter % 2 != 0) {
+                    System.out.println("I am in if in DJN");
                     int temp = ObjOp.DJN(j);
                     if (temp != 1000000) {
                         IndexPlayer1 = temp;
-                    } else {
-                        temp = ObjOp.DJN(j);
-                        if (temp != 1000000) {
-                            IndexPlayer2 = temp;
-                        }
+                    }
+                } else {
+                    System.out.println("I am in if in DJN");
+                    int temp = ObjOp.DJN(j);
+                    if (temp != 1000000) {
+                        IndexPlayer2 = temp;
                     }
                 }
+
             } else if (operation[j].equals("CMP")) {
                 if (GameCounter % 2 == 1) {
-                    IndexPlayer1 = ObjOp.JMP(j);
+                    IndexPlayer1 = ObjOp.CMP(j);
                 } else {
-                    IndexPlayer2 = ObjOp.JMP(j);
+                    IndexPlayer2 = ObjOp.CMP(j);
                 }
             } else if (operation[j].equals("SPL")) {
                 if (GameCounter % 2 == 1) {
@@ -303,4 +309,5 @@ public class GameSimulator {
         }
     }
 }
+
 

@@ -1,4 +1,4 @@
-DJN 5, @5
+DJN 5, 5
 ADD 2, 3
 JMP -2
 DAT #3

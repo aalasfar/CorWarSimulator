@@ -184,7 +184,7 @@ public class Instructions {
         SetIndexesToZero();
         CalcIndexes(index);
 
-        if (mB[index].equals("#") && !"@".equals(mB[index])) {
+        if (mB[index].equals("#") && !mB[index].equals("@")) {
             System.out.println("we are in #");
             fB[index] = fB[index] - 1;
             if (fB[index] != 0) {
@@ -194,7 +194,7 @@ public class Instructions {
                     return a_x;
                 }
             }
-        } else if (mB[index].equals("@") && !"#".equals(mB[index])) {
+        } else if (mB[index].equals("@") && !mB[index].equals("#")) {
             System.out.println("we are in @");
             fB[w] = fB[w] - 1;
             if (fB[w] != 0) {
@@ -204,7 +204,7 @@ public class Instructions {
                     return a_x;
                 }
             }
-        }else if(!"#".equals(mB[index]) && !"@".equals(mB[index])) {
+        }else if(!mB[index].equals("#") && !mB[index].equals("@")) {
             System.out.println("we r in none");
             fB[b_x] = fB[b_x] - 1;
             System.out.println("fB " + fB[b_x]);
@@ -228,8 +228,17 @@ public class Instructions {
         } else if (mA[index].equals("*") && mB[index].equals("@")) {
             if(command[q]==command[w] && mA[q]==mA[w] && mB[q]==mB[w] && fA[q]==fA[w] && fB[q]==fB[w]){
                 return index + 1; }
-            else {return index; }
-        }else{  return index;   }
+            //else {return index; }
+        }else if(mA[index].equals("*") && !mB[index].equals("@")){
+            if(command[q]==command[b_x] && mA[q]==mA[b_x] && mB[q]==mB[b_x] && fA[q]==fA[b_x] && fB[q]==fB[b_x]){
+                return index + 1;   }
+            //else { return index;   }
+        }else if(!mA[index].equals("*") && mB[index].equals("@")){
+            if(command[a_x]==command[w] && mA[a_x]==mA[w] && mB[a_x]==mB[w] && fA[a_x]==fA[w] && fB[a_x]==fB[w]){
+            return index + 1;   }
+            //else{   return index;   }
+        }
+          return index;
     }
 
 
