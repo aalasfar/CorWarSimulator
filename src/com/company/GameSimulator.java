@@ -9,7 +9,7 @@ public class GameSimulator {
     ArrayList<String> Player2 = new ArrayList<String>();
     OpenFile f = new OpenFile();
 
-    final int MAX = 80;
+    final int MAX = 200;
     final int MIN = 0;
     boolean noWinner = true;
     int initialPos2 = 0;

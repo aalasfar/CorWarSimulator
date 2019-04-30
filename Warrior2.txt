@@ -1,6 +1,6 @@
-DJN 5, 5
+CMP 5, 4
+ADD 3, 4
 ADD 2, 3
-JMP -2
+JMP -3
 DAT #3
-DAT #2
-MOV 0, 1
+DAT #3
