@@ -9,7 +9,7 @@ public class GameSimulator {
     ArrayList<String> Player2 = new ArrayList<String>();
     OpenFile f = new OpenFile();
 
-    final int MAX = 8000;
+    final int MAX = 80;
     final int MIN = 0;
     boolean noWinner = true;
     int initialPos2 = 0;
@@ -61,9 +61,8 @@ public class GameSimulator {
         //int count = 0;  //count how many times iterated in Player1 for tracking size
 
         // System.out.println("noWinner " + noWinner);
+        System.out.println("\n\nWar Started!");
         RunSimulation(instruction, modeA, modeB, Afield, Bfield, initialPos, initialPos2);
-
-
     }
 
     //method for placing warrior
@@ -97,7 +96,7 @@ public class GameSimulator {
             instruction[x] = myArray[x].substring(0, 3); // gets instruction
             // need to check for DAT input since the number is in the B field
             //code is same as else statement but doesn't check mode and only changes B value
-            if (instruction[x].equals("DAT")) {
+            /*if (instruction[x].equals("DAT")) {
                 String str = s.replaceAll("[^-?0-9]+", " ");
                 String strnum[] = str.split(" ");
                 char[] arr = s.toCharArray();
@@ -105,8 +104,8 @@ public class GameSimulator {
                 for (int u = 0; u < strnum.length - 1; u++) {
                     numbers[u] = Integer.parseInt(strnum[u + 1]);
                 }
-                Bfield[x] = numbers[0];
-            } else {
+                Bfield[x] = numbers[0];*/
+            //} else {
                 String str = s.replaceAll("[^-?0-9]+", " ");
                 //gets numbers from the string
                 String strnum[] = str.split(" ");
@@ -119,10 +118,12 @@ public class GameSimulator {
                     numbers[u] = Integer.parseInt(strnum[u + 1]);
                 }
                 //checks if the string has a mode for A
+            if (!"DAT".equals(instruction[x])) {
                 if (str2[1].substring(0, 1).equals("#") || str2[1].substring(0, 1).equals("*")
                         || str2[1].substring(0, 1).equals("@")) {
                     modeA[x] = str2[1].substring(0, 1);
                 }
+            }
                 //checks if the string has mode for B
                 if (str2.length == 3) {
                     if (str2[2].substring(0, 1).equals("#") || str2[2].substring(0, 1).equals("*")
@@ -131,22 +132,26 @@ public class GameSimulator {
                     }
                 }
                 //assigns the numbers to their appropriate field
-                Afield[x] = numbers[0];
-                Bfield[x] = numbers[1];
+                if(!"DAT".equals(instruction[x])){
+                    Afield[x] = numbers[0];
+                    Bfield[x] = numbers[1];
+                } else{
+                    Afield[x] = 0;  Bfield[x] = numbers[0]; modeB[x] = str2[1].substring(0,1);
+                }
             }
         }
-    }
+  //  }
 
     public void PrintWarriors(String[] inst, int position, String[] mA, String[] mB, int[] fA, int[] fB) {
         for (int i = -5; i < 6; i++) {
             int k = (i + position + MAX) % MAX;
             //System.out.println("k = "+k);
             if (k == position) {
-                System.out.println(k + ":" + inst[k] + " " + mA[k] + fA[k] + "," + mB[k] + fB[k]);
+                System.out.println(String.format("%04d",k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
             } else {
-                System.out.println(k + ":" + inst[k] + " " + mA[k] + fA[k] + "," + mB[k] + fB[k]);
+                System.out.println(String.format("%04d",k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
             }
-        }
+        }   System.out.println("\n");
     }
 
     //method for checking if the initial position of second warrior is valid
@@ -184,21 +189,24 @@ public class GameSimulator {
             //checking which warrior's turn
             if (GameCounter % 2 != 0) {
                 if (Flag1 && SplCount1 % 2 != 0) {
+                    System.out.println("********* Turn:   Warrior 1' **********\n");
                     SplIndex1 = KeepIndexWithinLimits(SplIndex1);
                     j = SplIndex1;
                     SplIndex1++;
                 } else {
+                    System.out.println("********* Turn:   Warrior 1 ************\n");
                     IndexPlayer1 = KeepIndexWithinLimits(IndexPlayer1);
-                    //System.out.println("Index Player player checker " + IndexPlayer1);
                     j = IndexPlayer1;
                     IndexPlayer1++;
                 }
             } else {
                 if (Flag2 && SplCount2 % 2 != 0) {
+                    System.out.println("******** Turn:   Warrior 2' ************\n");
                     SplIndex2 = KeepIndexWithinLimits(SplIndex2);
                     j = SplIndex2;
                     SplIndex2++;
                 } else {
+                    System.out.println("******** Turn:   Warrior 2 *************\n");
                     IndexPlayer2 = KeepIndexWithinLimits(IndexPlayer2);
                     j = IndexPlayer2;
                     IndexPlayer2++;
@@ -216,38 +224,41 @@ public class GameSimulator {
             } else if (operation[j].equals("SUB")) {
                 ObjOp.SUB(j);
             } else if (operation[j].equals("JMP")) {
+                System.out.println("JMP is being called");
                 if (GameCounter % 2 == 1) {
                     IndexPlayer1 = ObjOp.JMP(j);
+             //       System.out.println("IndexPlayer1 " + IndexPlayer1);
                 } else {
                     IndexPlayer2 = ObjOp.JMP(j);
+               //     System.out.println("IndexPlayer2 " + IndexPlayer2);
                 }
             } else if (operation[j].equals("JMZ")) {
-                if (GameCounter % 2 == 1) {
-                    IndexPlayer1 = ObjOp.JMZ(j);
-                    if (IndexPlayer1 == 1000000) {
-                        System.out.println("Something wrong");
-                        break;
+                System.out.println("in JMZ");
+
+                if (GameCounter % 2 != 0) {
+                    int temp = ObjOp.JMZ(j);
+                    if (temp != 1000000) {
+                        IndexPlayer1 = temp;
+                        System.out.println("IndexPlayer1 " + IndexPlayer1);
                     } else {
-                        IndexPlayer2 = ObjOp.JMZ(j);
-                        if (IndexPlayer2 == 1000000) {
-                            System.out.println("something wrong");
-                            break;
+                        temp = ObjOp.JMZ(j);
+                        if (temp != 1000000) {
+                            IndexPlayer2 = temp;
+                            System.out.println("IndexPlayer2 " + IndexPlayer2);
                         }
                     }
                 }
 
             } else if (operation[j].equals("DJN")) {
                 System.out.println("in DJN");
-                if (GameCounter % 2 == 1) {
-                    IndexPlayer1 = ObjOp.DJN(j);
-                    if (IndexPlayer1 == 1000000) {
-                        System.out.println("Something wrong");
-                        break;
+                if (GameCounter % 2 != 0) {
+                    int temp = ObjOp.DJN(j);
+                    if (temp != 1000000) {
+                        IndexPlayer1 = temp;
                     } else {
-                        IndexPlayer2 = ObjOp.DJN(j);
-                        if (IndexPlayer2 == 1000000) {
-                            System.out.println("something wrong");
-                            break;
+                        temp = ObjOp.DJN(j);
+                        if (temp != 1000000) {
+                            IndexPlayer2 = temp;
                         }
                     }
                 }
@@ -259,10 +270,12 @@ public class GameSimulator {
                 }
             } else if (operation[j].equals("SPL")) {
                 if (GameCounter % 2 == 1) {
+                    System.out.println("SPL 1 is called");
                     Flag1 = true;
                     SplIndex1 = ObjOp.JMP(j);
                     SplCount1++;
                 } else {
+                    System.out.println("SPL 2 is called");
                     Flag2 = true;
                     SplIndex2 = ObjOp.JMP(j);
                     SplCount2++;
@@ -276,10 +289,10 @@ public class GameSimulator {
             // PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
             GameCounter++;
 
-            System.out.println("\nWarrior 1");
+            System.out.println("Warrior 1");
             PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
 
-            System.out.println("\nWarrior 2");
+            System.out.println("Warrior 2");
             PrintWarriors(operation, IndexPlayer2, mode_A, mode_B, f_A, f_B);
         }
 

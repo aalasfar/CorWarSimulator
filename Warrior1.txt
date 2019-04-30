@@ -1,4 +1,4 @@
-SPL 2
-ADD #3, 2
-ADD 4, 3
-MOV 0, 1
+ADD #4, 3
+MOV 2, @2
+JMZ -2, 2
+DAT #2
