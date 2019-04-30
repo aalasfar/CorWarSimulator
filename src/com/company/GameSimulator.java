@@ -118,7 +118,7 @@ public class GameSimulator {
                     numbers[u] = Integer.parseInt(strnum[u + 1]);
                 }
                 //checks if the string has a mode for A
-            if (!"DAT".equals(instruction[x])) {
+            if (!instruction[x].equals("DAT")) {
                 if (str2[1].substring(0, 1).equals("#") || str2[1].substring(0, 1).equals("*")
                         || str2[1].substring(0, 1).equals("@")) {
                     modeA[x] = str2[1].substring(0, 1);
@@ -132,7 +132,7 @@ public class GameSimulator {
                     }
                 }
                 //assigns the numbers to their appropriate field
-                if(!"DAT".equals(instruction[x])){
+                if(!instruction[x].equals("DAT")){
                     Afield[x] = numbers[0];
                     Bfield[x] = numbers[1];
                 } else{
