@@ -53,7 +53,7 @@ public class GameSimulator {
         //PrintWarriors(instruction, initialPos, modeA, modeB, Afield, Bfield);
 
         checkPosition(initialPos);
-        System.out.println("\nWarrior 2 ");
+        System.out.println("\n\tWarrior 2 ");
         System.out.println("initialPos2 = " + initialPos2);
         int sizeOfWarrior2 = PlacingInput(Player2, myArray, initialPos2);
         ParsingInput(sizeOfWarrior2, initialPos2, myArray, instruction, modeA, modeB, Afield, Bfield);
@@ -149,15 +149,10 @@ public class GameSimulator {
             int k = (i + position_1 + MAX) % MAX;
             int j = (i + position_2 + MAX) % MAX;
             //System.out.println("k = "+k);
-            System.out.print(String.format("%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k] + "\t\t\t\t");
-            System.out.print(String.format("%04d", j) + " :" + inst[j] + "\t" + mA[j] + fA[j] + "\t" + mB[j] + fB[j]+ "\n");
+            System.out.print(String.format("%04d", k) + " :" + inst[k]+"\t"+String.format("%5s",mA[k]+fA[k])+"\t"+String.format("%5s",mB[k]+fB[k])+"\t\t\t");
+            System.out.print(String.format("%04d", j) + " :" + inst[j]+"\t"+String.format("%5s",mA[j]+fA[j])+"\t"+String.format("%5s",mB[j]+fB[j])+ "\n");
 
         }
-        //for (int i = -5; i < 6; i++) {
-          //  int k = (i + position_2 + MAX) % MAX;
-            //System.out.println("k = "+k);
-            //System.out.println(String.format("\t\t"+ "%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
-        //}
         System.out.println("\n");
     }
 
@@ -197,24 +192,24 @@ public class GameSimulator {
             //checking which warrior's turn
             if (GameCounter % 2 != 0) {
                 if (Flag1 && SplCount1 % 2 != 0) {
-                    System.out.println("********* Turn:   Warrior 1' **********\n");
+                    System.out.println("************ Turn:   Warrior 1' **********\n");
                     SplIndex1 = KeepIndexWithinLimits(SplIndex1);
                     j = SplIndex1;
                     SplIndex1++;
                 } else {
-                    System.out.println("********* Turn:   Warrior 1 ************\n");
+                    System.out.println("************ Turn:   Warrior 1 ************\n");
                     IndexPlayer1 = KeepIndexWithinLimits(IndexPlayer1);
                     j = IndexPlayer1;
                     IndexPlayer1++;
                 }
             } else {
                 if (Flag2 && SplCount2 % 2 != 0) {
-                    System.out.println("******** Turn:   Warrior 2' ************\n");
+                    System.out.println("*********** Turn:   Warrior 2' ************\n");
                     SplIndex2 = KeepIndexWithinLimits(SplIndex2);
                     j = SplIndex2;
                     SplIndex2++;
                 } else {
-                    System.out.println("******** Turn:   Warrior 2 *************\n");
+                    System.out.println("*********** Turn:   Warrior 2 *************\n");
                     IndexPlayer2 = KeepIndexWithinLimits(IndexPlayer2);
                     j = IndexPlayer2;
                     IndexPlayer2++;
@@ -232,7 +227,6 @@ public class GameSimulator {
             } else if (operation[j].equals("SUB")) {
                 ObjOp.SUB(j);
             } else if (operation[j].equals("JMP")) {
-                System.out.println("JMP is being called");
                 if (GameCounter % 2 == 1) {
                     IndexPlayer1 = ObjOp.JMP(j);
                     //       System.out.println("IndexPlayer1 " + IndexPlayer1);
@@ -241,7 +235,6 @@ public class GameSimulator {
                     //     System.out.println("IndexPlayer2 " + IndexPlayer2);
                 }
             } else if (operation[j].equals("JMZ")) {
-                System.out.println("in JMZ");
 
                 if (GameCounter % 2 != 0) {
                     int temp = ObjOp.JMZ(j);
@@ -258,7 +251,6 @@ public class GameSimulator {
                 }
 
             } else if (operation[j].equals("DJN")) {
-                System.out.println("in DJN");
                 if (GameCounter % 2 != 0) {
                     System.out.println("I am in if in DJN");
                     int temp = ObjOp.DJN(j);
@@ -281,12 +273,10 @@ public class GameSimulator {
                 }
             } else if (operation[j].equals("SPL")) {
                 if (GameCounter % 2 == 1) {
-                    System.out.println("SPL 1 is called");
                     Flag1 = true;
                     SplIndex1 = ObjOp.JMP(j);
                     SplCount1++;
                 } else {
-                    System.out.println("SPL 2 is called");
                     Flag2 = true;
                     SplIndex2 = ObjOp.JMP(j);
                     SplCount2++;
@@ -300,7 +290,7 @@ public class GameSimulator {
             // PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
             GameCounter++;
 
-            System.out.println("Warrior 1 \t\t\t\t\t\tWarrior 2");
+            System.out.println("\t\tWarrior 1 \t\t\t\t\t\t\tWarrior 2\n");
             //PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B,operation, IndexPlayer2, mode_A, mode_B, f_A, f_B);
 
             //System.out.println("Warrior 2");

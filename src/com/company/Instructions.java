@@ -239,7 +239,6 @@ public class Instructions {
             //else{   return index;   }
         }
         else if (!mA[index].equals("*") && !mB[index].equals("@")){
-            System.out.println("in none CMP");
             if(command[a_x]==command[b_x] && mA[a_x]==mA[b_x] && mB[a_x]==mB[b_x] && fA[a_x]==fA[b_x] && fB[a_x]==fB[b_x]){
                 return index + 1;   }
         }
