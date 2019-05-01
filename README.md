@@ -28,7 +28,7 @@ Program X, Program Y, Program X', Program Y, Program X...
 * [x] Warriors take turns executing an instruction
 * [x] Display Game Status - Current Instruction, Previous 5 and Next 5 Instructions
 * [x] Game ends and Displays result -(Program 'X' Wins or Draw)
+* (For draw game does 24,000 turns before calling a draw so It can run through entire core 3 times)
 
 [//]: # (* [ ] Got any features?)
-The following **additional** features are implemented:<br/>
-* [ ] 
+No **additional** features are implemented:<br/>
