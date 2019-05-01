@@ -149,8 +149,8 @@ public class GameSimulator {
             int k = (i + position_1 + MAX) % MAX;
             int j = (i + position_2 + MAX) % MAX;
             //System.out.println("k = "+k);
-            System.out.print(String.format("%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
-            System.out.print(String.format("\t\t"+ "%04d", j) + " :" + inst[j] + "\t" + mA[j] + fA[j] + "\t" + mB[j] + fB[j]+ "\n");
+            System.out.print(String.format("%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k] + "\t\t\t\t");
+            System.out.print(String.format("%04d", j) + " :" + inst[j] + "\t" + mA[j] + fA[j] + "\t" + mB[j] + fB[j]+ "\n");
 
         }
         //for (int i = -5; i < 6; i++) {
@@ -300,7 +300,7 @@ public class GameSimulator {
             // PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
             GameCounter++;
 
-            System.out.println("Warrior 1 \t\t\t\tWarrior 2");
+            System.out.println("Warrior 1 \t\t\t\t\t\tWarrior 2");
             //PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B,operation, IndexPlayer2, mode_A, mode_B, f_A, f_B);
 
             //System.out.println("Warrior 2");
