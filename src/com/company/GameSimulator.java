@@ -182,6 +182,7 @@ public class GameSimulator {
         int j;
         int GameCounter = 1;    //for alternating between warriors; warrior 1 is odd and 2 is even
         int SplCount1 = 0;
+        int draw = 0;
         int SplCount2 = 0;
         int SplIndex1 = 0;
         int SplIndex2 = 0;
@@ -300,12 +301,18 @@ public class GameSimulator {
 
             System.out.println("Warrior 2");
             PrintWarriors(operation, IndexPlayer2, mode_A, mode_B, f_A, f_B);
+            if (GameCounter == MAX){
+                System.out.println("Game is a draw");
+                draw++;
+                break;
+            }
         }
-
-        if (GameCounter % 2 == 0) {
-            System.out.println("\nWarrior 1 is the Winner!");
-        } else {
-            System.out.println("\nWarrior 2 is the Winner!");
+        if (draw == 0) {
+            if (GameCounter % 2 == 0) {
+                System.out.println("\nWarrior 1 is the Winner!");
+            } else {
+                System.out.println("\nWarrior 2 is the Winner!");
+            }
         }
     }
 }
