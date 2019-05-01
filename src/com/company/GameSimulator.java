@@ -9,7 +9,7 @@ public class GameSimulator {
     ArrayList<String> Player2 = new ArrayList<String>();
     OpenFile f = new OpenFile();
 
-    final int MAX = 200;
+    final int MAX = 8000;
     final int MIN = 0;
     boolean noWinner = true;
     int initialPos2 = 0;
@@ -50,14 +50,14 @@ public class GameSimulator {
         System.out.println("initialPos = " + initialPos);
         int sizeOfWarrior1 = PlacingInput(Player1, myArray, initialPos);
         ParsingInput(sizeOfWarrior1, initialPos, myArray, instruction, modeA, modeB, Afield, Bfield);
-        PrintWarriors(instruction, initialPos, modeA, modeB, Afield, Bfield);
+        //PrintWarriors(instruction, initialPos, modeA, modeB, Afield, Bfield);
 
         checkPosition(initialPos);
         System.out.println("\nWarrior 2 ");
         System.out.println("initialPos2 = " + initialPos2);
         int sizeOfWarrior2 = PlacingInput(Player2, myArray, initialPos2);
         ParsingInput(sizeOfWarrior2, initialPos2, myArray, instruction, modeA, modeB, Afield, Bfield);
-        PrintWarriors(instruction, initialPos2, modeA, modeB, Afield, Bfield);
+        PrintWarriors(instruction, initialPos, modeA, modeB, Afield, Bfield,initialPos2);
         //int count = 0;  //count how many times iterated in Player1 for tracking size
 
         // System.out.println("noWinner " + noWinner);
@@ -144,16 +144,20 @@ public class GameSimulator {
     }
     //  }
 
-    public void PrintWarriors(String[] inst, int position, String[] mA, String[] mB, int[] fA, int[] fB) {
+    public void PrintWarriors(String[] inst, int position_1, String[] mA, String[] mB, int[] fA, int[] fB, int position_2) {
         for (int i = -5; i < 6; i++) {
-            int k = (i + position + MAX) % MAX;
+            int k = (i + position_1 + MAX) % MAX;
+            int j = (i + position_2 + MAX) % MAX;
             //System.out.println("k = "+k);
-            if (k == position) {
-                System.out.println(String.format("%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
-            } else {
-                System.out.println(String.format("%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
-            }
+            System.out.print(String.format("%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
+            System.out.print(String.format("\t\t"+ "%04d", j) + " :" + inst[j] + "\t" + mA[j] + fA[j] + "\t" + mB[j] + fB[j]+ "\n");
+
         }
+        //for (int i = -5; i < 6; i++) {
+          //  int k = (i + position_2 + MAX) % MAX;
+            //System.out.println("k = "+k);
+            //System.out.println(String.format("\t\t"+ "%04d", k) + " :" + inst[k] + "\t" + mA[k] + fA[k] + "\t" + mB[k] + fB[k]);
+        //}
         System.out.println("\n");
     }
 
@@ -296,13 +300,13 @@ public class GameSimulator {
             // PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
             GameCounter++;
 
-            System.out.println("Warrior 1");
-            PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B);
+            System.out.println("Warrior 1 \t\t\t\tWarrior 2");
+            //PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B,operation, IndexPlayer2, mode_A, mode_B, f_A, f_B);
 
-            System.out.println("Warrior 2");
-            PrintWarriors(operation, IndexPlayer2, mode_A, mode_B, f_A, f_B);
-            if (GameCounter == MAX){
-                System.out.println("Game is a draw");
+            //System.out.println("Warrior 2");
+            PrintWarriors(operation, IndexPlayer1, mode_A, mode_B, f_A, f_B, IndexPlayer2);
+            if (GameCounter == MAX * 3){
+                System.out.println("Game is a Draw");
                 draw++;
                 break;
             }

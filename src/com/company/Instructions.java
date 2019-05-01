@@ -54,7 +54,7 @@ public class Instructions {
         index = ObjLoopIndex.KeepIndexWithinLimits(index);
         SetIndexesToZero();
         CalcIndexes(index);
-    System.out.println("MOV is being called");
+    //System.out.println("MOV is being called");
         if (mA[index].equals("#")) {
             fB[b_x] = fA[index];
         } else if (mA[index].equals("*") && !"@".equals(mB[index])) {
@@ -89,7 +89,7 @@ public class Instructions {
         index = ObjLoopIndex.KeepIndexWithinLimits(index);
         SetIndexesToZero();
         CalcIndexes(index);
-        System.out.println("ADD is being called");
+      //  System.out.println("ADD is being called");
         if (mA[index].equals("#") && !"@".equals(mB[index])) {
             fB[b_x] = fA[index] + fB[b_x];
         } else if (mA[index].equals("#") && mB[index].equals("@")) {
@@ -153,10 +153,10 @@ public class Instructions {
 
         if (mB[index].equals("#") && fB[index] == 0) {
             if (mA[index].equals("*")) {
-                System.out.println("q " +q);
+                //System.out.println("q " +q);
                 return q;
             } else {
-                System.out.println("a_x " +a_x);
+              //  System.out.println("a_x " +a_x);
                 return a_x;
             }
         } else if (mB[index].equals("@")) {
@@ -185,7 +185,7 @@ public class Instructions {
         CalcIndexes(index);
 
         if (mB[index].equals("#") && !mB[index].equals("@")) {
-            System.out.println("we are in #");
+            //System.out.println("we are in #");
             fB[index] = fB[index] - 1;
             if (fB[index] != 0) {
                 if (mA[index].equals("*")) {
@@ -195,7 +195,7 @@ public class Instructions {
                 }
             }
         } else if (mB[index].equals("@") && !mB[index].equals("#")) {
-            System.out.println("we are in @");
+            //System.out.println("we are in @");
             fB[w] = fB[w] - 1;
             if (fB[w] != 0) {
                 if (mA[index].equals("*")) {
@@ -205,9 +205,9 @@ public class Instructions {
                 }
             }
         }else if(!mB[index].equals("#") && !mB[index].equals("@")) {
-            System.out.println("we r in none");
+            //System.out.println("we r in none");
             fB[b_x] = fB[b_x] - 1;
-            System.out.println("fB " + fB[b_x]);
+            //System.out.println("fB " + fB[b_x]);
             if (fB[w] != 0) {
                 if (mA[index].equals("*")) {
                     return q;
