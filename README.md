@@ -1,6 +1,8 @@
 # Assignment 2 - *Core WAR*
 
-**Project Name** Project description.
+**Ultimate War** Project description.
+This program uses 5 arrays:
+Instruction, A mode, B mode, A field, and B field arrays each with the size of 8000. There are 4 classes; Main, instruction, OpenFile, and GameSimulator. The OpenFile class has a method for opening a txt file. The Instruction class has 8 methods for all instructions. The Gamesimulator calls the instructions and checks the turn for the warriors and prints them. 11 instructions are printed for each warriror. For draw game does 24,000 turns before calling a draw so It can run through entire core 3 times. 
 
 Team Name: Endgame
 * **Nathaniel Aponte**
